@@ -1,5 +1,5 @@
 <%= javascript_include_tag 'users/sign_up' %>
-<script src='http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js'></script>
+
 <h1>Sign Up</h1>
 
 <% if flash[:notice] %>
@@ -7,11 +7,14 @@
 <% end %>
 <br>
 
+<div>
 <% if @user.errors.present? %>
   <% @user.errors.full_messages.each do |msg|  %>
     <%= msg %>
+    <br>
   <% end %>
 <% end %>
+</div>
 
 <div id="signup-form">
     <%= form_for @user do |f|%>
@@ -19,13 +22,13 @@
     This is the only information we require for you to signup, no passwords necessary! Read more about our <%= link_to "passwordless login process here.", faq_path %>
 
     <div class="form-group">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.label :email %>
+    <%= f.text_field :email, type: 'email' %>
     </div>
 
     <div class="form-group">
-    <%= f.label :email %>
-    <%= f.text_field :email, type: 'email' %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
     </div>
 
     <div class="form-group">
@@ -69,10 +72,10 @@
     <%= f.text_field :location %>
     </div>
 
-    <div class="form-group">
-    <%= f.label :country_id %>
-    <%= f.number_field :country_id %>
-    </div>
+   <!--  <div class="form-group">
+    <#%= f.label :country_id %>
+    <#%= f.number_field :country_id %>
+    </div> -->
 
     <div id='signup-back' class="btn">Back</div>
     <%= f.submit %>
@@ -80,3 +83,6 @@
   <% end %>
 </div><!-- end signup form-->
 
+
+<script src='//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js'>
+</script>

@@ -16,10 +16,13 @@ Kitter::Application.routes.draw do
 
   root 'main#welcome'
 
+  get '/validate_input/*type' => 'sessions#validate_input'
+
   get '/login' => 'sessions#new'
   post '/login/:user_id/send_login_link' => 'sessions#request_token', as: :request_token
   get '/login/:user_id/*auth_token' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
+
 
   get '/faq' => 'main#faq'
 
@@ -32,7 +35,6 @@ Kitter::Application.routes.draw do
     post '/unfollow' => 'users#unfollow'
     post '/block' => 'users#block'
     post '/unblock' => 'users#unblock'
-    post 'check_email' => 'users#check_email'
     resources :tweets, shallow: true do
        post '/favorite' => 'tweets#favorite'
        post '/unfavorite' => 'tweets#unfavorite'

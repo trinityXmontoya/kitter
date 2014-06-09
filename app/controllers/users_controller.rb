@@ -32,12 +32,14 @@ class UsersController < ApplicationController
   def update
     @user=User.find_by_username(params[:id])
     @user.update(user_params)
+    redirect_to @user
   end
 
   def destroy
     @user=User.find_by_username(params[:id])
     session[@user.id]=nil
     @user.destroy
+    redirect_to root_path
   end
 
   def notifications

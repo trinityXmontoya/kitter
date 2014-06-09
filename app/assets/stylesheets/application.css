@@ -32,4 +32,9 @@ a {
 .hide-me {
   display: none;
 }
+
+.input-error {
+  display: inline-block;
+  background-color: orange;
+}
 /*SIGN UP */

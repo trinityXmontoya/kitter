@@ -13,6 +13,4 @@ class ApplicationController < ActionController::Base
       redirect_to login_path, notice: "You must login to perform that action"
     end
   end
-
-
 end

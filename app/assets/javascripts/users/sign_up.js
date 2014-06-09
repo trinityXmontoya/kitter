@@ -1,30 +1,10 @@
 
 $(document).ready(function(){
-  console.log("signup js loaded baby!")
-  $('input#user_name').on('focusout',checkEmail);
-  $('input#user_email').on('focusout',checkUsername);
-   $('#signup-back').on('click', loadStep1);
-   $('#signup-continue').on('click',loadStep2)
-  loadStep2();
+ console.log("signup js loaded baby!");
+ $('#signup-back').on('click', loadStep1);
+ $('#signup-continue').on('click',loadStep2);
+ loadValidations();
 });
-
-function checkEmail(){
-  console.log('check email js!');
-  $('#new_user').validate({
-  debug: true,
-  rules: {
-  'user[email]': {required: true, email: true, remote:'/users/check_email'} }
-});
-};
-
-function checkUsername(){
- console.log('check username js!');
-  $('#new_user').validate({
-  debug: true,
-  rules: {
-  'user[username]': {required: true},}
-});
-};
 
 function loadStep1(){
     showStep(1);
@@ -55,4 +35,29 @@ function setUsername(){
     $('#entered-username').text(message);
   }
 };
+
+function loadValidations(){
+  $("#new_user").validate({
+    debug: true,
+    rules: {
+      "user[email]": {required: true, email: true, remote: "/check_signup_input/email"},
+      "user[name]": {required: true},
+      "user[username]": {required: true, remote: "/check_signup_input/username"}
+    },
+    messages: {
+      "user[email]": {
+        required: "Email address is required for our passwordless login stystem",
+        email: "Your email address must be in the format of name@domain.com",
+        remote: "This email is taken"
+      },
+      "user[name]": {
+        require: "Name is required to signup. It will be displayed as name @username",
+      },
+      "user[username]": {
+        required: "Username required to signup. It will be displayed as name @username",
+        remote: "This name is taken"
+      }
+    }
+  });
+}
 

@@ -3,6 +3,21 @@ class SessionsController < ApplicationController
   def new
   end
 
+  def validate_input
+    if params[:type] == 'email'
+      user = User.find_by_email(params[:user][:email])
+    elsif params[:type] == 'username'
+      user = User.find_by_username(params[:user][:username])
+    end
+    respond_to do |format|
+      if current_user && current_user == user
+        format.json { render :json => true }
+      else
+        format.json { render :json => !user}
+      end
+    end
+  end
+
   def request_token
     @user = User.find_by(username: params[:user_id])
     if @user
