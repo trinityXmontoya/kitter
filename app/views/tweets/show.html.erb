@@ -9,6 +9,6 @@ Retweets: <%= @tweet.num_of_retweets %>
   <%= submit_tag "Meow back" %>
 <% end %>
 
-<%= @replies.each do |reply| %>
-  <%= render 'tweets/individual_tweet_template', tweet: reply %>
+<% @replies.each do |reply| %>
+  <%= render 'tweets/individual_tweet_template', tweet: reply.reply_tweet %>
 <% end %>
