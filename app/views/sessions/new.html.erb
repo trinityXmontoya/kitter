@@ -1,19 +1,25 @@
-<div id="login_wrapper">
+<%= javascript_include_tag 'session/login' %>
 
-  <h1>Login</h1>
+<div id="login_wrapper">
+    <h1>Login</h1>
 
     <div class="errors">
     <%= flash[:notice] %>
     </div>
 
-    <div id="login_form">
-    <%= form_tag sessions_path do %>
 
-    <%= label_tag :username_or_email %>
-    <%= text_field_tag :username_or_email %>
-
-    <%= submit_tag %>
-    <% end %>
+  <div id="sign-up">
+    <div class="sign-up-directions">
+      Ready to login? Just start typing your username below!
     </div>
 
+    <div id="sign-up-form">
+      <%= form_tag request_token_path(user_id: 0), id:'login-form' do %>
+        <%= select_tag :user_id, options_from_collection_for_select(User.all, :id, :username), id: 'login-username-selection', prompt: "" %>
+        <br>
+        <%= submit_tag "Do it!", class: "button expand" %>
+      <% end %>
+    </div>
+    <br>
+  </div>
 </div>

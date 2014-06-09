@@ -4,7 +4,6 @@
 
 <div class="row span12">
   <% @tweets.each do |tweet| %>
-    <%= tweet.content.html_safe %>
-    <br>
+    <%= render 'tweets/individual_tweet_template', tweet: tweet %>
   <% end %>
 </div>

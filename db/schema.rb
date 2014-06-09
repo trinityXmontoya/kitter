@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140609023613) do
+ActiveRecord::Schema.define(version: 20140609050340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,16 +95,18 @@ ActiveRecord::Schema.define(version: 20140609023613) do
     t.string   "username"
     t.string   "name"
     t.string   "email"
-    t.string   "background_photo_url", default: "http://static2.grsites.com/archive/textures/ss/ss013.jpg"
-    t.string   "profile_photo_url",    default: "http://img2.wikia.nocookie.net/__cb20130302002623/glee/images/5/50/20120814044316!Pusheen.png"
+    t.string   "background_photo_url",  default: "http://static2.grsites.com/archive/textures/ss/ss013.jpg"
+    t.string   "profile_photo_url",     default: "http://img2.wikia.nocookie.net/__cb20130302002623/glee/images/5/50/20120814044316!Pusheen.png"
     t.string   "bio"
     t.string   "website"
-    t.boolean  "verified",             default: false
+    t.boolean  "verified",              default: false
     t.string   "location"
-    t.string   "password_digest"
     t.integer  "country_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "auth_token"
+    t.datetime "auth_token_created_at"
+    t.datetime "login_link_sent"
   end
 
 end

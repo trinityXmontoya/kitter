@@ -17,7 +17,8 @@ Kitter::Application.routes.draw do
   root 'main#welcome'
 
   get '/login' => 'sessions#new'
-  post '/sessions' => 'sessions#create'
+  post '/login/:user_id/send_login_link' => 'sessions#request_token', as: :request_token
+  get '/login/:user_id/*auth_token' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
 
   get '/faq' => 'main#faq'

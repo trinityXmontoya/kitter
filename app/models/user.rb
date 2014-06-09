@@ -28,10 +28,40 @@ class User < ActiveRecord::Base
 
   validates :email, correct_email_format: true
 
+  # set user_id to username for more readable urls
   def to_param
     username
   end
 
+  # LOGIN AUTH
+  def send_login_link
+    self.reset_auth_token
+    link = "login/" + self.username + "/" + self.auth_token
+    UserMailer.send_user_token(self,link).deliver
+    self.update_attributes(login_link_sent: Time.now)
+  end
+
+  def reset_auth_token
+    self.update_attributes(auth_token: self.generate_token)
+    self.update_attributes(auth_token_created_at: Time.now)
+    self.save
+  end
+
+  def validate_token(token)
+    ((token == self.auth_token) && (self.token_is_not_expired)) ? true : false
+  end
+
+  # TO DO, change to hour
+  def token_is_not_expired
+    ((Time.now-self.login_link_sent) /60) < 2
+  end
+
+  def generate_token
+    token = SecureRandom.base64(23)
+    User.where("auth_token = ?", token).exists? ? generate_token : token
+  end
+
+  # TWEET ACTIONS
   def follow(other_user)
     other_user.followers << self
   end

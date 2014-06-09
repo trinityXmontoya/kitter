@@ -5,10 +5,7 @@
       <span class="username"><%=tweet.user.name%></span>
   <%=link_to "@#{tweet.user.username}", user_path(tweet.user)%>
   .
-  <% today = Time.new.hour %>
-  <% created = tweet.created_at.hour %>
-  <% time_since = time_since || (today - created)/60.to_i.abs %>
-  <%=link_to "#{time_since} hrs ago", tweet_path(tweet)%>
+  <%=link_to "#{time_ago_in_words(tweet.created_at)}", tweet_path(tweet)%>
     </p>
     <div class="tweet_content">
       <%=tweet.content.html_safe%>

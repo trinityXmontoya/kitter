@@ -32,9 +32,6 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-# Use ActiveModel has_secure_password
-gem 'bcrypt', '~> 3.1.7'
-
 # Use unicorn as the app server
 # gem 'unicorn'
 
@@ -53,10 +50,11 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
   gem 'embedly'
+  gem 'dotenv-rails'
 end
 
 #Twitter Bootstrap
 
 gem 'twitter-bootstrap-rails'
-
-
+gem 'chosen-rails'
+gem "haml"
