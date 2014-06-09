@@ -21,11 +21,18 @@
       <%= submit_tag "Reply" %>
       <% end %>
 
-      <%= form_tag tweet_retweet_path(tweet) do %>
-      <%= submit_tag "Retweet" %>
+
+      <% if current_user.retweeted_tweets.include?(tweet) %>
+        <%= form_tag tweet_undo_retweet_path(tweet) do %>
+        <%= submit_tag "Undo retweet" %>
+        <% end %>
+      <% else %>
+        <%= form_tag tweet_retweet_path(tweet) do %>
+        <%= submit_tag "Retweet" %>
+        <% end %>
       <% end %>
 
-      <% if current_user.favorited_tweets.include? (tweet) %>
+      <% if current_user.favorited_tweets.include?(tweet) %>
         <%= form_tag tweet_unfavorite_path(tweet) do%>
         <%= submit_tag "Unfavorite" %>
         <% end %>

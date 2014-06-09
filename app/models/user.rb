@@ -67,7 +67,12 @@ class User < ActiveRecord::Base
   def retweet(tweet)
     retweets.create!(tweet: tweet)
     tweet.user.notifications.create!(tweet:tweet,poster_id: id, kind: 'retweeted')
-    tweet.update_num_of_retweets
+    tweet.update_num_of_retweets(1)
+  end
+
+  def undo_retweet(tweet)
+    retweeted_tweets.delete(tweet)
+    tweet.update_num_of_retweets(-1)
   end
 
   def followees

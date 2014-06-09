@@ -78,8 +78,8 @@ class Tweet < ActiveRecord::Base
     update(num_of_favs: self.num_of_favs+=num)
   end
 
-  def update_num_of_retweets
-    update(num_of_retweets: self.num_of_retweets+=1)
+  def update_num_of_retweets(num)
+    update(num_of_retweets: self.num_of_retweets+=num)
   end
 
   def self.find_with_hashtag(hashtag)

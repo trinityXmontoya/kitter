@@ -36,6 +36,7 @@ Kitter::Application.routes.draw do
        post '/favorite' => 'tweets#favorite'
        post '/unfavorite' => 'tweets#unfavorite'
        post '/retweet' => 'tweets#retweet'
+       post '/undo_retweet' => 'tweets#undo_retweet'
        post '/reply' => 'tweets#reply'
     end
   end

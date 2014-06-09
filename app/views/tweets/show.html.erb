@@ -10,5 +10,7 @@ Retweets: <%= @tweet.num_of_retweets %>
 <% end %>
 
 <% @replies.each do |reply| %>
+  <%= reply %>
+  <%= reply.reply_tweet %>
   <%= render 'tweets/individual_tweet_template', tweet: reply.reply_tweet %>
 <% end %>

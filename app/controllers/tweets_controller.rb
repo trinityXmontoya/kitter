@@ -43,6 +43,12 @@ class TweetsController < ApplicationController
     redirect_to @tweet, notice: 'retweeted'
   end
 
+  def undo_retweet
+    @tweet=Tweet.find(params[:tweet_id])
+    current_user.undo_retweet(@tweet)
+    redirect_to @tweet, notice: 'undid retweeted'
+  end
+
   def reply
     original_tweet = Tweet.find(params[:tweet_id])
     new_tweet = current_user.tweets.new(content: params[:content])
