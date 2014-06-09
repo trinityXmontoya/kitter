@@ -13,7 +13,7 @@
   <%= submit_tag "Block" %>
   <% end %>
 
-  <% if current_user.followees.include?(follower) %>
+  <% if current_user.followings.include?(follower) %>
     <%= form_tag user_unfollow_path(follower) do %>
     <%= submit_tag "Unfollow" %>
     <% end %>

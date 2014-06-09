@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 
   has_many :tweets, dependent: :destroy
+
   has_many :replies, dependent: :destroy
 
   has_many :retweets, dependent: :destroy
@@ -64,6 +65,7 @@ class User < ActiveRecord::Base
   # TWEET ACTIONS
   def follow(other_user)
     other_user.followers << self
+    other_user.notifications.create!(tweet_id: 0, poster_id: id, kind: 'followed')
   end
 
   def unfollow(other_user)
@@ -105,12 +107,16 @@ class User < ActiveRecord::Base
     tweet.update_num_of_retweets(-1)
   end
 
-  def followees
-    followees = []
-    Follow.where(follower_id: id).each do |follow|
-      followees << follow.user
+  def followings
+    Follow.where(follower_id: id)
+  end
+
+  def tweet_replies
+    replies = []
+    tweets.each do |tweet|
+      replies << Reply.where(original_tweet_id: tweet.id )
     end
-    return followees
+    return replies
   end
 
 end

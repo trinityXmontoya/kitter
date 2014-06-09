@@ -1,0 +1,29 @@
+<h1>Notifications</h1>
+
+<% @all_notifications.each do |notification| %>
+
+    <% if notification.class == Notification %>
+      <% if notification.kind == 'retweeted' || notification.kind == 'favorited' %>
+      <div class='row span 12'>
+        <%= link_to notification.poster.name, notification.poster %>
+        <%= notification.kind %> your tweet!
+
+        <%= notification.tweet.created_at.strftime("%D")%>
+        <%= notification.tweet.content.html_safe %>
+      </div>
+      <% end %>
+
+      <% if notification.kind == 'replied' %>
+      <%= render 'tweets/individual_tweet_template', tweet: notification.tweet %>
+      <% end %>
+
+      <% if notification.kind == 'followed' %>
+        <%= link_to notification.poster.name, notification.poster %> followed you!
+        <%= image_tag notification.poster.profile_photo, width: '40' %>
+      <% end %>
+    <% else %>
+      <%= notification.reply_tweets %>
+    <% end %>
+
+
+<% end %>

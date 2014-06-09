@@ -4,7 +4,7 @@ class MainController<ApplicationController
 
   def welcome
     @user=current_user
-    users = User.all.reject {|user| @user.followees.include?(user)}
+    users = User.all.reject {|user| @user.followings.include?(user)}
     @users=users.sample(3)
     @hashtags=Hashtag.all.sample(10)
     @tweets=Tweet.all.order('updated_at DESC')

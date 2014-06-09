@@ -44,7 +44,10 @@ class UsersController < ApplicationController
 
   def notifications
     @user=User.find_by_username(params[:user_id])
-    @notifications=@user.notifications
+    notifications=@user.notifications
+    replies = @user.tweet_replies
+    # @all_notifications = (notifications + replies).sort_by{|notification| notification.updated_at}.reverse
+    @all_notifications = (notifications + replies)
   end
 
   def followers
@@ -56,7 +59,7 @@ class UsersController < ApplicationController
 
   def following
     @user=User.find_by_username(params[:user_id])
-    @followees = @user.followees
+    @followings = @user.followings
     init_const_vars
     render_user_static_layout
   end
@@ -104,7 +107,7 @@ class UsersController < ApplicationController
     @hashtags = Hashtag.all.order(num_of_times_used: :desc)
     @path = @user, Tweet.new
     puts "About to sort through users"
-    users = User.all.reject {|user| @user.followees.include?(user)}
+    users = User.all.reject {|user| @user.followings.include?(user)}
     @users=users.sample(3)
   end
 

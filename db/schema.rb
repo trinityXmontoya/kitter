@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140609050340) do
+ActiveRecord::Schema.define(version: 20140609110744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,8 +61,10 @@ ActiveRecord::Schema.define(version: 20140609050340) do
   end
 
   create_table "replies", force: true do |t|
-    t.integer "original_tweet_id"
-    t.integer "reply_tweet_id"
+    t.integer  "original_tweet_id"
+    t.integer  "reply_tweet_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "retweets", id: false, force: true do |t|
