@@ -52,7 +52,14 @@
   = f.label :location
   = f.text_field :location
 
+  %br
   = f.submit
+
+%hr
+
+  %div
+    = button_to "Delete Account", @user, method: :delete
+    %h5 If you delete your account you will not be able to recover it and all tweets will be deleted
 
 
 %script{src: :"//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"}
