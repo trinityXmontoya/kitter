@@ -1,0 +1,205 @@
+/*HOME LAYOUT*/
+
+
+/*HOME NAV*/
+#home_nav{
+  background-color: whitesmoke;
+  height: 50px;
+}
+
+#home_nav li {
+  display: inline-block;
+  padding: 5px 10px;
+  text-decoration: none;
+  font-size: 14px;
+
+}
+
+/*HOME LEFT SIDEBAR*/
+
+.left_sidebar {
+  min-width: 390px;
+  max-width: 490px;
+  padding: 0 0 0 60px;
+}
+
+div.home_user_info.row.span12 {
+  margin: 0 0 0 12px;
+}
+
+
+#home_sidebar_user_info {
+  height: 194px;
+  color: black;
+  font-weight: bold;
+  text-align: center;
+  font-size: 20px;
+}
+
+#home_sidebar_user_info img {
+  width: 200px;
+  margin: 25px 52px 0 52px;
+}
+
+#home_sidebar_user_info p {
+  background-color: whitesmoke;
+/*  margin: -53px 0;*/
+  padding: 2px 0;
+
+}
+
+#home_sidebar_user_stats{
+  background-color:whitesmoke;
+  text-align: center;
+}
+
+#home_sidebar_user_stats li {
+  list-style: none;
+  display: inline-block;
+  text-transform: uppercase;
+  padding: 5px;
+}
+
+.numbers {
+  font-weight: bold;
+  font-size: 23px;
+  color: green;
+}
+
+.num_link {
+  font-size: 13px;
+}
+
+
+#tweet_box {
+  background-color: rgb(188,235,222);
+  height: 70px;
+  padding: 5px 5px 10px 5px;
+  border-radius: 0 0 6px 6px;
+}
+
+input#tweet_content {
+ text-align: center;
+  padding: 8px;
+  margin: 3px 25px;
+  float: right;
+}
+
+input[value="Meow!"] {
+margin: 2px 28px;
+text-align: center;
+float: right;
+}
+
+
+.who_to_follow{
+}
+
+.who_to_follow p {
+  font-size: 18px;
+  display: inline;
+}
+
+.who_to_follow img {
+  height: 60px;
+  width: 60px;
+}
+.who_to_follow_info {
+  display: inline-block;
+  margin: 15px 0 0 0;
+}
+
+.who_to_follow form {
+  display: inline-block;
+}
+
+.follow {
+  display: inline-block;
+}
+
+
+.sidebar_hashtags {
+}
+
+.sidebar {
+  background-color: whitesmoke;
+  border-radius: 6px;
+  margin: 15px 0 0 0;
+  padding: 10px;
+  min-width: 290px;
+}
+
+
+.sidebar_footer {
+  padding: 10px;
+  margin: 15px 0 15px 0;
+}
+
+
+/*MAIN CONTENT RIGHT SIDEBAR*/
+
+.home_main_content {
+  padding: 0 0 0 20px;
+}
+
+.right_sidebar {
+  background-color: whitesmoke;
+  padding: 10px 0;
+  border-radius: 6px;
+  display: inline-block;
+  min-width: 635px;
+}
+
+.right_sidebar h2 {
+  padding: 0 0 10px 15px;
+}
+
+div.each_tweet.span12 {
+  max-height: 150px;
+  border-top: 1px solid gray;
+  padding: 10px 0 10px 0;
+  margin: 0;
+}
+
+.tweet_user_photo {
+  width: 100px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.each_tweet div.tweet_info{
+  display: inline-block;
+  font-size:16px;
+  width: 80%;
+}
+
+.tweet_content {
+  max-height: 70px;
+  word-wrap:break-word;
+}
+
+.username {
+  font-weight: bold;
+}
+
+.user_info {
+  display: inline-block;
+}
+
+
+.home_tweet_actions {
+  float:right;
+  padding: 15px 10px 0 0px;
+}
+
+.home_tweet_actions form {
+  display: inline-block;
+  margin: 0 7px 0 0;
+}
+
+
+
+.left_sidebar {
+  display: inline-block;
+  width: 300px;
+}

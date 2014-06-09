@@ -1,0 +1,6 @@
+<% @hashtags.each do |hashtag| %>
+<%= link_to "/hashtags/#{hashtag.content}" do %>
+#<%= hashtag.content %>
+<%= hashtag.num_of_times_used %>
+<% end %>
+<% end %>

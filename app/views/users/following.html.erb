@@ -1,0 +1,19 @@
+<h3>Following</h3>
+
+<% @followees.each do |followee| %>
+  <img src="<%= followee.profile_photo_url%>" alt="" />
+  <%= link_to followee do %>
+  <%= followee.name %>
+  <%= "@#{followee.username}" %>
+  <% end %>
+  <%= followee.bio %>
+
+  <%= form_tag user_block_path(followee) do %>
+  <%= submit_tag "Block" %>
+  <% end %>
+
+  <%= form_tag user_unfollow_path(followee) do %>
+  <%= submit_tag "Unfollow" %>
+  <% end %>
+
+<% end %>

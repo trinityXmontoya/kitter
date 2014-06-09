@@ -1,0 +1,8 @@
+<h1>Get Tweeting!</h1>
+
+<%= flash[:notice] %>
+
+<%= form_for @path do |f| %>
+<%= f.text_field :content, placeholder: 'limit 140 characters', maxlength: 140  %>
+<%= f.submit "Meow!" %>
+<% end %>

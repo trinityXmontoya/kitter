@@ -1,0 +1,149 @@
+
+<% content_for :content do %>
+  <div class="left_sidebar span4">
+
+    <nav class="user_profile sidebar row span12">
+      <li><%= link_to "Tweets", user_path(@user) %> ></li>
+      <li><%= link_to "Following", user_following_path(@user) %> ></li>
+      <li><%= link_to "Followers", user_followers_path(@user) %> ></li>
+      <li><%= link_to "Favorites", user_favorites_path(@user) %> ></li>
+    </nav>
+
+    <% unless current_user == @user %>
+      <div class="tweet_to sidebar row span12">
+        <h3>Tweet to <%= @user.username%></h3>
+        <%= form_for @path do |f| %>
+        <%= f.text_field :content, placeholder: "limit 140 characters"  %>
+        <%= f.submit "Meow!" %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="photos_and_videos sidebar row span12">
+      <h3>Photos and Videos</h3>
+    </div>
+
+    <div class="who_to_follow sidebar row span12">
+        <p>Who To Follow | <span class="num_link"><%=link_to "View All", users_path%></span></p>
+        <br>
+        <% @users.each do |user|  %>
+          <% unless current_user == user %>
+            <div class="who_to_follow_info">
+              <img src="<%=user.profile_photo_url%>" alt="" />
+              <div class="follow">
+                <p><%= link_to "@#{user.username}", user_path(user)  %></p>
+                <br>
+                <% unless current_user.followers.include?(user) %>
+                  <%= form_tag user_follow_path(user) do  %>
+                  <%= submit_tag "Follow" %>
+                  <% end %>
+                <% end %>
+              </div><!--.follow -->
+            </div><!--.who_to_follow_info -->
+            <br>
+          <% end %>
+        <% end %>
+      </div><!--.who_to_follow sidebar -->
+
+
+    <div class="sidebar_hashtags sidebar row span12">
+      <h3>Trends</h3>
+      <%@hashtags.each do |hashtag|%>
+        <%= link_to "##{hashtag.content}", hashtag_path(hashtag) %>
+        <br>
+      <% end %>
+    </div>
+
+
+    <div class="sidebar_footer sidebar row span12">
+      &copy; Trinity Montoya 2014
+      <br>
+      <a href="#">About</a>
+      <br>
+      <a href="#">Github</a>
+      <br>
+      <a href="#">Personal Page</a>
+    </div>
+
+  </div><!-- .left_sidebar -->
+
+
+
+
+<div class="right_sidebar span6">
+  <%= bootstrap_flash %>
+
+
+    <div class="individual_user col-md-5" style="background-image: url('<%=@user.background_photo_url%>')">
+      <img class="individual_user_photo" src="<%= @user.profile_photo_url %>">
+      <%= @user.name %>
+      <%= @user.username %>
+      <%= @user.bio %>
+      <%= @user.location %>
+      <%= link_to @user.website, @user.website %>
+    </div>
+
+    <div class="user_info_container">
+        <%= link_to @user do %>
+        <div class="user_info">
+          TWEETS
+          <br>
+           <%= @user.tweets.length%>
+        </div>
+        <% end%>
+
+        <%= link_to user_following_path(@user) do %>
+        <div class="user_info">
+          FOLLOWING
+          <br>
+          <%= @user.followees.length %>
+        </div>
+        <% end%>
+
+        <%= link_to user_followers_path(@user) do %>
+        <div class="user_info">
+          FOLLOWERS
+          <br>
+          <%=@user.followers.length%>
+        </div>
+        <% end%>
+
+        <% if @user == current_user%>
+          <%= link_to "Edit profile", edit_user_path(@user)%>
+        <% else %>
+
+         <!--  If a user is blocked, you can only unblock them, following is obviously disabled until the user is unblocked and when you block a user they are automatically removed from your followers list -->
+          <% if current_user.blocked_users.include?(@user) %>
+            <%= form_tag user_unblock_path(@user) do %>
+            <%= submit_tag "Unblock" %>
+            <% end %>
+          <% else %>
+            <%= form_tag user_block_path(@user) do %>
+            <%= submit_tag "Block" %>
+            <% end %>
+
+              <% if current_user.followees.include?(@user) %>
+                <%= form_tag user_unfollow_path(@user) do  %>
+                <%= submit_tag "Unfollow" %>
+                <% end %>
+              <% else %>
+                <%= form_tag user_follow_path(@user) do %>
+                <%= submit_tag "Follow" %>
+                <% end %>
+              <% end %>
+            <% end %>
+
+        <% end %>
+
+      </div>
+
+
+  <div class="row-fluid">
+      <%= yield %>
+  </div>
+
+
+</div><!-- .span6 -->
+<% end %> <!-- end content -->
+
+<%= render template: "layouts/application" %>

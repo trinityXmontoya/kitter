@@ -1,0 +1,5 @@
+<% @tweets.each do |tweet| %>
+<%= link_to tweet.user.username, user_path(tweet.user) %>
+<%= tweet.content.html_safe %>
+<%= tweet.created_at.strftime("%D") %>
+<% end %>

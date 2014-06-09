@@ -1,0 +1,14 @@
+<%= render 'tweets/individual_tweet_template', tweet: @tweet %>
+
+Favorites:<%= @tweet.num_of_favs %>
+Retweets: <%= @tweet.num_of_retweets %>
+<%= @tweet.created_at.strftime("%D") %>
+
+<%= form_tag tweet_reply_path(@tweet) do %>
+  <%= text_field_tag :content %>
+  <%= submit_tag "Meow back" %>
+<% end %>
+
+<%= @replies.each do |reply| %>
+  <%= render 'tweets/individual_tweet_template', tweet: reply %>
+<% end %>

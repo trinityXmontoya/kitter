@@ -1,0 +1,113 @@
+class UsersController < ApplicationController
+
+  before_action :authenticate, only: [:edit,:update,:destroy]
+
+  def show
+    @user=User.find_by_username(params[:id])
+    retweets = @user.retweeted_tweets
+    @tweets=(@user.tweets+retweets)
+    @tweets=@tweets.sort_by{|tweet| tweet.updated_at}.reverse
+    init_const_vars
+    render_user_static_layout
+  end
+
+  def signup
+    @user=User.new
+  end
+
+  def create
+    @user = User.create(user_params)
+    if @user.save
+      session[:user_id] = @user.id
+      redirect_to @user, notice: "User created. Get kitting!"
+    else
+      render 'signup'
+    end
+  end
+
+  def edit
+    @user=User.find_by_username(params[:id])
+  end
+
+  def update
+    @user=User.find_by_username(params[:id])
+    @user.update(user_params)
+  end
+
+  def destroy
+    @user=User.find_by_username(params[:id])
+    session[@user.id]=nil
+    @user.destroy
+  end
+
+  def notifications
+    @user=User.find_by_username(params[:user_id])
+    @notifications=@user.notifications
+  end
+
+  def followers
+    @user=User.find_by_username(params[:user_id])
+    init_const_vars
+    @followers = @user.followers
+    render_user_static_layout
+  end
+
+  def following
+    @user=User.find_by_username(params[:user_id])
+    @followees = @user.followees
+    init_const_vars
+    render_user_static_layout
+  end
+
+  def favorites
+    @user = User.find_by_username(params[:user_id])
+    @favorites = @user.favorited_tweets.order(updated_at: :desc)
+    init_const_vars
+    render_user_static_layout
+    if @favorites.empty?
+      flash[:notice] = "Sorry! Looks like #{@user.username} hasn't favorited anything yet. Guess you'd better step up your kitting game"
+    end
+  end
+
+  def follow
+    other_user = User.find_by_username(params[:user_id])
+    current_user.follow(other_user)
+    redirect_to other_user, notice: "You are now following #{other_user.username}! Good luck."
+  end
+
+  def unfollow
+    other_user = User.find_by_username(params[:user_id])
+    current_user.unfollow(other_user)
+    redirect_to other_user, notice: "Congratulations. You have unfollowed #{other_user.username}."
+  end
+
+  def block
+    other_user = User.find_by_username(params[:user_id])
+    current_user.block(other_user)
+    redirect_to other_user, notice: "You have blocked #{other_user.username}, finally."
+  end
+
+  def unblock
+    other_user = User.find_by_username(params[:user_id])
+    current_user.unblock(other_user)
+    redirect_to other_user, notice: "You have unblocked #{other_user.username}! Good to see you two getting back together."
+  end
+
+  private
+  def user_params
+    params.require(:user).permit(:username, :name, :email, :bio, :website, :verified, :location, :country_id,:profile_photo_url, :background_photo_url)
+  end
+
+  def init_const_vars
+    @hashtags = Hashtag.all.order(num_of_times_used: :desc)
+    @path = @user, Tweet.new
+    puts "About to sort through users"
+    users = User.all.reject {|user| @user.followees.include?(user)}
+    @users=users.sample(3)
+  end
+
+  def render_user_static_layout
+    render :layout => 'user_static'
+  end
+
+end

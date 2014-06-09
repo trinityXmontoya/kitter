@@ -1,0 +1,6 @@
+
+<%= @user.username %>'s Tweets
+
+<% @tweets.each do |tweet| %>
+ <%= render 'tweets/individual_tweet_template', tweet: tweet %>
+<% end %>

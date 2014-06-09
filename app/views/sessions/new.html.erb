@@ -1,0 +1,19 @@
+<div id="login_wrapper">
+
+  <h1>Login</h1>
+
+    <div class="errors">
+    <%= flash[:notice] %>
+    </div>
+
+    <div id="login_form">
+    <%= form_tag sessions_path do %>
+
+    <%= label_tag :username_or_email %>
+    <%= text_field_tag :username_or_email %>
+
+    <%= submit_tag %>
+    <% end %>
+    </div>
+
+</div>

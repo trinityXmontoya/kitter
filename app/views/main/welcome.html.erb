@@ -1,0 +1,99 @@
+
+<div class="span4 left_sidebar">
+
+  <div class="home_user_info row span12">
+      <%= link_to @user do %>
+        <div id="home_sidebar_user_info" style="background-image:url('<%=@user.background_photo_url%>')">
+          <img src="<%= @user.profile_photo_url%>" alt=""/>
+          <p><%= @user.name %> <%= "@#{@user.username}" %></p>
+        </div>
+      <% end %>
+
+      <%= link_to @user do %>
+        <div id="home_sidebar_user_stats" class="home_div">
+          <li>
+            Tweets
+            <br>
+            <span class="numbers"><%= @user.tweets.length%></span>
+          </li>
+      <% end%>
+
+      <%= link_to user_following_path(@user) do %>
+        <li>
+          Following
+          <br>
+          <span class="numbers"><%= @user.followers.length %></span>
+        </li>
+      <% end%>
+
+      <%= link_to user_followers_path(@user) do %>
+        <li>
+          Followers
+          <br>
+          <span class="numbers"><%=@user.followees.length%></span>
+        </li>
+      <% end%>
+        </div>
+
+
+      <div id="tweet_box">
+        <%= form_for @path do |f| %>
+        <%= f.text_field :content, placeholder: 'limit 140 characters',maxlength: 140  %>
+        <%= f.submit "Meow!" %>
+        <% end %>
+      </div>
+
+    </div><!--/.sidebar_home -->
+
+
+    <div class="who_to_follow sidebar row span12">
+      <p>Who To Follow | <span class="num_link"><%=link_to "View All", users_path%></span></p>
+      <br>
+      <% @users.each do |user|  %>
+        <% unless current_user == user %>
+          <div class="who_to_follow_info">
+            <img src="<%=user.profile_photo_url%>" alt="" />
+            <div class="follow">
+              <p><%= user.name %> <%= link_to "@#{user.username}", user_path(user)  %></p>
+              <br>
+                <%= form_tag user_follow_path(user) do  %>
+                <%= submit_tag "Follow" %>
+                <% end %>
+            </div><!--.follow -->
+          </div><!--.who_to_follow_info -->
+          <br>
+        <% end %>
+      <% end %>
+    </div><!--.who_to_follow sidebar -->
+
+    <div class="sidebar_hashtags sidebar row span12">
+      <h3>Trends</h3>
+      <%@hashtags.each do |hashtag|%>
+        <%= link_to "##{hashtag.content}", hashtag_path(hashtag) %>
+        <br>
+      <% end %>
+    </div>
+
+    <div class="sidebar_footer sidebar row span12">
+      &copy; Trinity Montoya 2014
+      <br>
+      <a href="#">About</a>
+      <br>
+      <a href="http://www.github.com/trinityXmontoya">Github</a>
+      <br>
+      <a href="http://www.trinitymontoya.com">Personal Page</a>
+    </div>
+
+</div><!--/span-->
+
+<div class="span7 home_main_content">
+  <%= bootstrap_flash %>
+
+
+  <div class="right_sidebar span9">
+    <h2>Tweets</h2>
+      <% @tweets.each do |tweet| %>
+        <%= render 'tweets/individual_tweet_template', tweet: tweet %>
+      <%end%>
+  </div><!-- .right_sidebar -->
+</div><!-- span6 -->

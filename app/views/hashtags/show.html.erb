@@ -1,0 +1,10 @@
+<div class="row span12">
+  <h1>#<%= @hashtag.content %></h1>
+</div>
+
+<div class="row span12">
+  <% @tweets.each do |tweet| %>
+    <%= tweet.content.html_safe %>
+    <br>
+  <% end %>
+</div>

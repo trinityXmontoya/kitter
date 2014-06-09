@@ -1,0 +1,26 @@
+<h1>All Users</h1>
+
+<% @users.each do |user| %>
+ <%= link_to user do %>
+  <div class="user_index col-md-2">
+  <img class="user_index_image" src="<%= user.profile_photo_url%>">
+  <%= user.username %>
+  </div>
+  <% end %>
+
+  <% unless current_user == user %>
+
+  <% unless current_user.followers.include?(user) %>
+  <%= form_tag user_follow_path(user) do  %>
+  <%= submit_tag "Follow" %>
+  <% end %>
+  <% end %>
+
+  <% if current_user.followers.include?(user) %>
+  <%= form_tag user_unfollow_path(user) do %>
+  <%= submit_tag "Unfollow" %>
+  <% end %>
+  <% end %>
+  <% end %>
+
+  <% end %>
