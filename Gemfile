@@ -46,7 +46,6 @@ group :development, :test do
   gem 'pry-rails'
   gem 'factory_girl_rails'
   gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
-  gem 'embedly'
   gem 'dotenv-rails'
 end
 
@@ -55,7 +54,7 @@ end
 gem 'twitter-bootstrap-rails'
 gem 'chosen-rails'
 gem "haml"
-
+gem 'embedly'
 
 gem 'rails_12factor', group: :production
 gem 'unicorn'
