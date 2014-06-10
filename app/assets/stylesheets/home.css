@@ -67,8 +67,9 @@ div.home_user_info.row.span12 {
 }
 
 #home_sidebar_user_info img {
-  width: 200px;
-  margin: 25px 52px 0 52px;
+  max-width: 200px;
+max-height: 145px;
+margin: 25px 52px 0 52px;
 }
 
 #home_sidebar_user_info p {

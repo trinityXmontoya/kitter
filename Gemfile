@@ -58,3 +58,6 @@ end
 gem 'twitter-bootstrap-rails'
 gem 'chosen-rails'
 gem "haml"
+
+
+gem 'rails_12factor', group: :production
