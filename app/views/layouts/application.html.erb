@@ -75,6 +75,7 @@
     <div class="container-fluid">
       <div class="row-fluid">
 
+      <% if current_user %>
       <div class="modal fade" id="newTweetModal" tabindex="-1" role="dialog" aria-labeledby="newTweetModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -84,7 +85,7 @@
             <%= f.text_field :content, placeholder: 'limit 140 characters', maxlength: 140  %>
             <%= f.submit "Meow!" %>
             <% end %>
-
+        <% end %>
           </div>
         </div>
       </div>
