@@ -14,14 +14,14 @@ class TweetsController < ApplicationController
   end
 
   def create
-    @path=[@user,@tweet]
     @user=User.find_by_username(params[:user_id])
     @tweet = @user.tweets.new(content: tweet_params[:content])
     if @tweet.save
       redirect_to tweet_path(@tweet), notice: "Successfully created!"
     else
+      @path=[@user,@tweet]
       flash[:notice]="Please correct the following errors: \n Tweet is too long."
-      render 'new'
+      redirect_to root_path
     end
   end
 

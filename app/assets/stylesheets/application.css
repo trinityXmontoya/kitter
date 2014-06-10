@@ -25,6 +25,11 @@ a {
   font-family: Helvetica;
 }
 
+a:hover {
+text-decoration: none;
+opacity: .8;
+}
+
 .display-me {
   display: block !important ;
 }

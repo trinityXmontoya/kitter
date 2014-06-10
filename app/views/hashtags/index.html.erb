@@ -1,6 +1,12 @@
-<% @hashtags.each do |hashtag| %>
-<%= link_to "/hashtags/#{hashtag.content}" do %>
-#<%= hashtag.content %>
-<%= hashtag.num_of_times_used %>
-<% end %>
-<% end %>
+<h3>Discover Trending Hashtags</h3>
+<div id="hashtags" class="row span10">
+  <% @hashtags.each do |hashtag| %>
+    <%= link_to "/hashtags/#{hashtag.content}" do %>
+    <div class='each_hashtag'>
+      <span class="label label-info">#<%= hashtag.content %></span>
+      <% end %>
+    <%= hashtag.num_of_times_used %>
+    <br>
+    </div>
+    <% end %>
+</div>

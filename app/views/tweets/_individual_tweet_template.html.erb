@@ -1,5 +1,5 @@
 <div class="each_tweet span12">
-  <img class="tweet_user_photo" src="<%= tweet.user.profile_photo_url%>" alt="" />
+  <div class="tweet_user_photo" style="background-image: url(<%= tweet.user.profile_photo_url%>)"/></div>
   <div class="tweet_info">
     <p>
       <span class="username"><%=tweet.user.name%></span>

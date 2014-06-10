@@ -15,6 +15,36 @@
 
 }
 
+.navbar .brand {
+  width: 50px;
+  margin-left: -46px;
+}
+
+.brand a {
+  margin: 0 0 0 3px;
+  color: black;
+}
+
+.navbar .nav {
+  position: relative;
+left: 0;
+display: block;
+margin: 23px 0 0 30px;
+width: 95%;
+}
+
+.navbar .nav>li>a {
+  padding: 5px;
+}
+
+.right {
+  float: right !important;
+}
+
+img.nav_icon{
+  max-width: 50px !important;
+}
+
 /*HOME LEFT SIDEBAR*/
 
 .left_sidebar {
@@ -162,15 +192,20 @@ div.each_tweet.span12 {
 }
 
 .tweet_user_photo {
-  width: 100px;
+  height: 50px;
+  width: 50px;
   display: inline-block;
   vertical-align: top;
+  margin: 0 0 0 10px;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .each_tweet div.tweet_info{
   display: inline-block;
   font-size:16px;
   width: 80%;
+  margin: 0 0 0 10px;
 }
 
 .tweet_content {
@@ -189,7 +224,8 @@ div.each_tweet.span12 {
 
 .home_tweet_actions {
   float:right;
-  padding: 15px 10px 0 0px;
+ /* padding: 15px 10px 0 0px;*/
+ padding: 15px 10px 0 10px;
 }
 
 .home_tweet_actions form {
@@ -202,4 +238,10 @@ div.each_tweet.span12 {
 .left_sidebar {
   display: inline-block;
   width: 300px;
+}
+
+
+/*HASHTAGS*/
+.each_hashtag {
+  margin: 5px;
 }

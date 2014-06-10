@@ -47,6 +47,6 @@ Kitter::Application.routes.draw do
   get '/signup' => 'users#signup'
 
   get '/hashtags/:hashtag' => 'hashtags#show', as: :hashtag
-  get '/hashtags' => 'hashtags#index'
+  get '/discover' => 'hashtags#index', as: :hashtag_discover
 
 end

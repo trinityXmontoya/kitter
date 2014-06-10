@@ -52,18 +52,18 @@
             <ul class="nav">
 
 
-              <li><% unless current_user %></li>
+              <% unless current_user %>
               <li><%= link_to "Login", login_path%></li>
               <li><%= link_to "Sign Up", signup_path%></li>
                   <% end %>
 
                   <% if current_user %>
               <li><%= link_to image_tag('notification.png', class: 'nav_icon')+"Notifications", user_notifications_path(current_user)%></li>
-              <li><%= link_to image_tag('hashtag.png', class: 'nav_icon') + "Discover", hashtags_path %></li>
-              <!-- <li><#%= link_to image_tag('profile.png', class: 'nav_icon')+"Me", user_path(current_user)%></li> -->
-              <li><%= link_to image_tag('settings.png', class: 'nav_icon'), edit_user_path(current_user)%></li>
-              <li><%= link_to image_tag('write.png', class: 'nav_icon'), new_user_tweet_path(current_user) %></li>
-              <li><%= link_to "Logout", logout_path%></li>
+              <li><%= link_to image_tag('hashtag.png', class: 'nav_icon') + "Discover", hashtag_discover_path %></li>
+              <li><%= link_to image_tag('kitter.png', class: 'nav_icon')+"You", user_path(current_user)%></li>
+              <li class="right"><%= link_to image_tag('settings.png', class: 'nav_icon'), edit_user_path(current_user)%></li>
+              <li class="right" data-toggle="modal" data-target="#newTweetModal"><%= image_tag('write.png', class: 'nav_icon') %></li>
+              <li class="right"><%= link_to "Logout", logout_path%></li>
                   <% end %>
 
             </ul>
@@ -74,6 +74,20 @@
 
     <div class="container-fluid">
       <div class="row-fluid">
+
+      <div class="modal fade" id="newTweetModal" tabindex="-1" role="dialog" aria-labeledby="newTweetModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <%= flash[:notice] %>
+
+            <%= form_for [current_user,Tweet.new] do |f| %>
+            <%= f.text_field :content, placeholder: 'limit 140 characters', maxlength: 140  %>
+            <%= f.submit "Meow!" %>
+            <% end %>
+
+          </div>
+        </div>
+      </div>
 
     <%= content_for?(:content) ? yield(:content) : yield %>
 
