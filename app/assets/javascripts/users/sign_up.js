@@ -38,11 +38,12 @@ function setUsername(){
 
 function loadValidations(){
   $("#new_user").validate({
-    debug: true,
+    debug: false,
     rules: {
       "user[email]": {required: true, email: true, remote: "/validate_input/email"},
       "user[name]": {required: true},
-      "user[username]": {required: true, remote: "/validate_input/username"}
+      "user[username]": {required: true, remote: "/validate_input/username"},
+      "user[website]": {required: false, url: true}
     },
     messages: {
       "user[email]": {
@@ -56,6 +57,9 @@ function loadValidations(){
       "user[username]": {
         required: "Username required to signup. It will be displayed as name @username",
         remote: "This name is taken"
+      },
+      "user[username]": {
+        email: "Incorrect format: must include http:// before"
       }
     }
   });
