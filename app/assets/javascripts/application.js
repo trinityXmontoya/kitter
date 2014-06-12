@@ -15,3 +15,4 @@
 //= require chosen-jquery
 //= require twitter/bootstrap
 //= require turbolinks
+//= require rails_admin
