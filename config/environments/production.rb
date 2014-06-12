@@ -1,7 +1,7 @@
 Kitter::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-config.assets.precompile += [ 'session/login.js users/edit.js users/sign_up.js' ]
+config.assets.precompile += [ 'rails_admin.js session/login.js users/edit.js users/sign_up.js' ]
 
   # Code is not reloaded between requests.
   config.cache_classes = true
