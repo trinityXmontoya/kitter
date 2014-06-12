@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
     end
     respond_to do |format|
       if current_user && current_user == user
-        format.json { render :json => true }
+        format.json { render :json => !user }
       else
         format.json { render :json => !user}
       end

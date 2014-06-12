@@ -46,8 +46,14 @@ class UsersController < ApplicationController
     @user=User.find_by_username(params[:user_id])
     notifications=@user.notifications
     replies = @user.tweet_replies
-    # @all_notifications = (notifications + replies).sort_by{|notification| notification.updated_at}.reverse
     @all_notifications = (notifications + replies)
+    puts "REPLIES"
+    puts replies
+    puts "NOTIFICATIONS"
+    puts @all_notifications
+    # puts @all_notifications.each {|n| n}
+    # @all_notifications = (notifications + replies).sort_by{|notification| notification.updated_at}.reverse
+
   end
 
   def followers

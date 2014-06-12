@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   def current_user
+    # User.find(7)
     session[:user_id] ? User.find(session[:user_id]) : nil
   end
 

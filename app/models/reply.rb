@@ -4,7 +4,7 @@ class Reply < ActiveRecord::Base
 
   validates :original_tweet_id, :reply_tweet_id, presence: true
 
-  after_create :notify_original_tweeter
+  # after_create :notify_original_tweeter
 
   def notify_original_tweeter
     original_tweet.user.notifications.create!(

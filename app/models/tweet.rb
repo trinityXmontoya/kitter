@@ -65,9 +65,9 @@ class Tweet < ActiveRecord::Base
     def find_mentions(string)
     string.split.each do |word|
       if word.match(/@\w{1,}/)
-        user=User.find_by(username: (word.delete("@")))
+        user=User.find_by_username((word.delete("@")))
         if user
-        string.sub!(word,"<a href='/users/#{user.id}'>#{word}</a>")
+        string.sub!(word,"<a href='/users/#{user.username}'>#{word}</a>")
         end
       end
     end

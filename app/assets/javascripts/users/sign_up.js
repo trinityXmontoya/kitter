@@ -40,9 +40,9 @@ function loadValidations(){
   $("#new_user").validate({
     debug: true,
     rules: {
-      "user[email]": {required: true, email: true, remote: "/check_signup_input/email"},
+      "user[email]": {required: true, email: true, remote: "/validate_input/email"},
       "user[name]": {required: true},
-      "user[username]": {required: true, remote: "/check_signup_input/username"}
+      "user[username]": {required: true, remote: "/validate_input/username"}
     },
     messages: {
       "user[email]": {
