@@ -23,3 +23,20 @@
 button.user_index_follow {
   background: none;
 }
+
+/*USER TWEET BOX*/
+#tweet-content-text {
+  width: 100%;
+  overflow: scroll;
+  -moz-appearance: textfield-multiline;
+  -webkit-appearance: textarea;
+  border: 1px solid gray;
+  font: medium -moz-fixed;
+  font: -webkit-small-control;
+  padding: 2px;
+  background-color: white;
+}
+
+.enlarge-form-input {
+  height: 150px !important;
+}

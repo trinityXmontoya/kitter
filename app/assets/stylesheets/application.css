@@ -37,6 +37,13 @@ opacity: .8;
   display: none;
 }
 
+textarea {
+  resize: none;
+}
+
+.text-over-limit {
+  color: red;
+}
 .input-error {
   display: inline-block;
   background-color: orange;

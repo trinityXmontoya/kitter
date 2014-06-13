@@ -112,8 +112,8 @@ margin: 25px 52px 0 52px;
 input#tweet_content {
  text-align: center;
   padding: 8px;
-  margin: 3px 25px;
-  float: right;
+  width: 100%;
+ /* margin: 3px 25px;*/
 }
 
 input[value="Meow!"] {
