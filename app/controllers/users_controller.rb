@@ -2,6 +2,10 @@ class UsersController < ApplicationController
 
   before_action :authenticate, only: [:edit,:update,:destroy]
 
+  def index
+    @users = User.all
+  end
+
   def show
     @user=User.find_by_username(params[:id])
     retweets = @user.retweeted_tweets
@@ -65,6 +69,7 @@ class UsersController < ApplicationController
 
   def following
     @user=User.find_by_username(params[:user_id])
+    puts @user.followings
     @followings = @user.followings
     init_const_vars
     render_user_static_layout

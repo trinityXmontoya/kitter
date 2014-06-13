@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+ class User < ActiveRecord::Base
 
   has_many :tweets, dependent: :destroy
 
@@ -107,13 +107,17 @@ class User < ActiveRecord::Base
   end
 
   def followings
-    Follow.where(follower_id: id)
+    followings = []
+    Follow.where(follower_id: id).each do |follow|
+      followings << follow.user
+    end
+    return followings
   end
 
   def tweet_replies
     replies = []
     tweets.each do |tweet|
-      replies << Reply.where(original_tweet_id: tweet.id )
+      replies << tweet.replies
     end
     return replies
   end

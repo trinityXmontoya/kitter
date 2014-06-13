@@ -1,6 +1,5 @@
 /*USER STATIC LAYOUT*/
 
-
 .user_profile {
   padding: 0;
 }
@@ -10,4 +9,17 @@
   padding: 10px;
   font-size: 16px;
 
+}
+
+/*USER INDEX LAYOUT*/
+.user_index {
+  display: inline-block;
+}
+.user_index_image {
+  max-width: 50px;
+  max-height: 50px
+}
+
+button.user_index_follow {
+  background: none;
 }

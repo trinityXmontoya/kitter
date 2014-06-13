@@ -10,8 +10,8 @@ class Hashtag < ActiveRecord::Base
     content.downcase
   end
 
-  def increase_num_of_times_used
-    update(num_of_times_used: self.num_of_times_used +=1)
+  def update_num_of_times_used(num)
+    update(num_of_times_used: self.num_of_times_used +=(num))
   end
 
   def to_param

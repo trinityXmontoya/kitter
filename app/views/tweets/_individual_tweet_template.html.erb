@@ -3,40 +3,37 @@
   <div class="tweet_info">
     <p>
       <span class="username"><%=tweet.user.name%></span>
-  <%=link_to "@#{tweet.user.username}", user_path(tweet.user)%>
-  .
-  <%=link_to "#{time_ago_in_words(tweet.created_at)}", tweet_path(tweet)%>
+        <%=link_to "@#{tweet.user.username}", user_path(tweet.user)%>
+        *
+        <%=link_to "#{time_ago_in_words(tweet.created_at)} ago", tweet_path(tweet)%>
     </p>
     <div class="tweet_content">
       <%=tweet.content.html_safe%>
     </div><!-- .tweet_content-->
   </div><!-- .tweet_info-->
 
-    <div class="home_tweet_actions">
+  <div class="home_tweet_actions">
+    <% if tweet.is_a_reply %>
+      <%= link_to "View Conversation", tweet_path(tweet.original_tweet_replied_to) %>
+    <% end %>
 
-      <%= form_tag tweet_path(tweet), method: :get do %>
-      <%= submit_tag "Reply" %>
-      <% end %>
+    <%= button_to "Reply", tweet_path(tweet), method: :get, class: 'btn'%>
 
+    <% if current_user.retweeted_tweets.include?(tweet) %>
+      <%= button_to "Undo retweet", tweet_undo_retweet_path(tweet) , class: 'btn'%>
+    <% else %>
+      <%= button_to "Retweet", tweet_retweet_path(tweet) , class: 'btn'%>
+    <% end %>
 
-      <% if current_user.retweeted_tweets.include?(tweet) %>
-        <%= form_tag tweet_undo_retweet_path(tweet) do %>
-        <%= submit_tag "Undo retweet" %>
-        <% end %>
-      <% else %>
-        <%= form_tag tweet_retweet_path(tweet) do %>
-        <%= submit_tag "Retweet" %>
-        <% end %>
-      <% end %>
+    <% if current_user.favorited_tweets.include?(tweet) %>
+      <%= button_to "Unfavorite", tweet_unfavorite_path(tweet) , class: 'btn'%>
+    <% else %>
+      <%= button_to "Favorite", tweet_favorite_path(tweet) , class: 'btn'%>
+    <% end %>
 
-      <% if current_user.favorited_tweets.include?(tweet) %>
-        <%= form_tag tweet_unfavorite_path(tweet) do%>
-        <%= submit_tag "Unfavorite" %>
-        <% end %>
-      <% else %>
-        <%= form_tag tweet_favorite_path(tweet) do%>
-        <%= submit_tag "Favorite" %>
-        <% end %>
-      <% end %>
-    </div><!-- .home_tweet_actions -->
+    <% if current_user == tweet.user %>
+      <%= button_to "Delete", tweet, method: :delete , class: 'btn' %>
+    <% end %>
+
+  </div><!-- .home_tweet_actions -->
 </div><!-- .each_tweet -->

@@ -56,9 +56,7 @@
             <div class="follow">
               <p><%= user.name %> <%= link_to "@#{user.username}", user_path(user)  %></p>
               <br>
-                <%= form_tag user_follow_path(user) do  %>
-                <%= submit_tag "Follow" %>
-                <% end %>
+                <%= button_to "Follow", user_follow_path(user) , class: 'btn'%>
             </div><!--.follow -->
           </div><!--.who_to_follow_info -->
           <br>

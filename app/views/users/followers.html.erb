@@ -8,19 +8,12 @@
   <%= "@#{follower.username}" %>
   <% end %>
   <%= follower.bio %>
-
-  <%= form_tag user_block_path(follower) do %>
-  <%= submit_tag "Block" %>
-  <% end %>
+  <%= button_to "Block", user_block_path(user) , class: 'btn'%>
 
   <% if current_user.followings.include?(follower) %>
-    <%= form_tag user_unfollow_path(follower) do %>
-    <%= submit_tag "Unfollow" %>
-    <% end %>
+    <%= button_to "Unfollow", user_unfollow_path(user) , class: 'btn'%>
   <% else %>
-    <%= form_tag user_follow_path(follower) do  %>
-    <%= submit_tag "Follow" %>
-    <% end %>
+    <%= button_to "Follow", user_follow_path(user) , class: 'btn'%>
   <% end %>
 
 <% end %>

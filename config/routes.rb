@@ -26,7 +26,7 @@ Kitter::Application.routes.draw do
 
   get '/faq' => 'main#faq'
 
-  resources :users, only:[:show,:create,:edit,:update,:destroy] do
+  resources :users, only:[:index,:show,:create,:edit,:update,:destroy] do
     get '/favorites' => 'users#favorites'
     get '/followers' => 'users#followers'
     get '/following' => 'users#following'

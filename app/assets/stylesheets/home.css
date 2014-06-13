@@ -132,8 +132,8 @@ float: right;
 }
 
 .who_to_follow img {
-  height: 60px;
-  width: 60px;
+  max-height: 60px;
+  max-width: 60px;
 }
 .who_to_follow_info {
   display: inline-block;
@@ -212,6 +212,7 @@ div.each_tweet.span12 {
 .tweet_content {
   max-height: 70px;
   word-wrap:break-word;
+  overflow: hidden
 }
 
 .username {

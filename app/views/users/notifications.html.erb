@@ -4,23 +4,31 @@
   <% if notification.class == Notification %>
     <% if notification.kind == 'retweeted' || notification.kind == 'favorited' %>
     <div class='row span 12'>
-      <%= link_to notification.poster.name, notification.poster %>
+      <%= image_tag("#{notification.kind}.png", size: "20") %>
+      <b><%= link_to notification.poster.name, notification.poster %></b>
       <%= notification.kind %> your tweet!
-
-      <%= notification.tweet.created_at.strftime("%D")%>
+      <%= notification.created_at.strftime("%b %e")%>
+      <br>
+      <%= link_to notification.tweet.created_at.strftime("%b %e:"), notification.tweet %>
       <%= notification.tweet.content.html_safe %>
+      <br>
+      <%= link_to(image_tag(notification.poster.profile_photo_url, width: '30'), notification.poster) %>
     </div>
     <% end %>
 
     <% if notification.kind == 'replied' %>
+    replied
     <%= render 'tweets/individual_tweet_template', tweet: notification.tweet %>
     <% end %>
 
     <% if notification.kind == 'followed' %>
+      <%= image_tag("followed.png", size: "20")%>
+      <%= image_tag notification.poster.profile_photo_url, width: '30' %>
       <%= link_to notification.poster.name, notification.poster %> followed you!
-      <%= image_tag notification.poster.profile_photo, width: '40' %>
     <% end %>
   <% else %>
-    <%= notification %>
+    <% notification.each do |n| %>
+    <%= render 'tweets/individual_tweet_template', tweet: n.reply_tweet %>
+    <%end%>
   <% end %>
 <% end %>
