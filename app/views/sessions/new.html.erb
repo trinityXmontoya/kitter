@@ -10,16 +10,13 @@
 
   <div id="sign-up">
     <div class="sign-up-directions">
-      Ready to login? Just start typing your username below!
+      Enter your username or email!!
     </div>
 
     <div id="sign-up-form">
       <%= form_tag request_token_path(user_id: 0), id:'login-form' do %>
-        <%= select_tag :user_id, options_from_collection_for_select(User.all, :id, :username), id: 'login-username-selection', prompt: "" %>
-        <br>
-        <%= submit_tag "Do it!", class: "button expand" %>
+        <%= text_field_tag :user_id %>
       <% end %>
     </div>
-    <br>
   </div>
 </div>

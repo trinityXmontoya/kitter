@@ -19,12 +19,17 @@ class SessionsController < ApplicationController
   end
 
   def request_token
-    @user = User.find_by(username: params[:user_id])
+    lookup = params[:user_id]
+    if lookup.include? '@'
+      @user = User.find_by(email: params[:user_id])
+    else
+      @user = User.find_by(username: params[:user_id])
+    end
     if @user
       @user.send_login_link
-      redirect_to login_path, notice: "Your email was sent."
+      redirect_to login_path, notice: "#{@user.username.capitalize} your email was sent!"
     else
-      redirect_to login_path, notice: "Whoops! Looks like you didn't select a username. Try again."
+      redirect_to login_path, notice: "Whoops! Looks like #{lookup} is registered on this site."
     end
   end
 
