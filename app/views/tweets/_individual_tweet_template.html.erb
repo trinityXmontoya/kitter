@@ -19,10 +19,12 @@
 
     <%= button_to "Reply", tweet_path(tweet), method: :get, class: 'btn'%>
 
-    <% if current_user.retweeted_tweets.include?(tweet) %>
-      <%= button_to "Undo retweet", tweet_undo_retweet_path(tweet) , class: 'btn'%>
-    <% else %>
-      <%= button_to "Retweet", tweet_retweet_path(tweet) , class: 'btn'%>
+    <% unless current_user == tweet.user %>
+      <% if current_user.retweeted_tweets.include?(tweet) %>
+        <%= button_to "Undo retweet", tweet_undo_retweet_path(tweet) , class: 'btn'%>
+      <% else %>
+        <%= button_to "Retweet", tweet_retweet_path(tweet) , class: 'btn'%>
+      <% end %>
     <% end %>
 
     <% if current_user.favorited_tweets.include?(tweet) %>
