@@ -16,6 +16,8 @@ Kitter::Application.routes.draw do
 
   root 'main#welcome'
 
+  get '/s/*path' => 'short_links#redirect'
+
   get '/validate_input/*type' => 'sessions#validate_input'
 
   get '/login' => 'sessions#new'

@@ -25,7 +25,7 @@ class Tweet < ActiveRecord::Base
     content.include? "(/#\w{1,}/)"
   end
 
-  def find_and_deletehashtags
+  def find_and_delete_hashtags
     content.split.each do |word|
         if word.include? "#"
           Hashtag.find(word).update_num_of_times_used(-1)
@@ -42,6 +42,8 @@ class Tweet < ActiveRecord::Base
       puts uri?(word)
       if uri?(word)
         string << embed_media(word)
+        short_url = shorten_url(word)
+        string.sub!(word, "<a href='#{short_url}'>#{short_url}</a>")
       end
     end
     return string
@@ -63,13 +65,22 @@ class Tweet < ActiveRecord::Base
     if obj[:type]=='video'
       obj[:html] if obj[:type]=='video'
     elsif obj[:type]=='photo'
-      "<img class='tweet-display-photo' src='#{url}'>"
+      "<img class='tweet-display-photo' src='#{shorten_url(url)}'>"
     else
       if obj[:title]
         url=obj[:title]
       end
       "<a href='url'>#{url}</a>"
     end
+  end
+
+  def shorten_url(url)
+    new_link = ShortLink.find_or_create_by_orig_url(url)
+    return 'http://localhost:3000' + '/s/' + new_link.short_url_path
+  end
+
+  def generate_short_url
+    path = SecureRandom.urlsafe_base64(6)
   end
 
   def find_hashtags(string)

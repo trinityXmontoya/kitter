@@ -57,7 +57,7 @@
   end
 
   def generate_token
-    token = SecureRandom.base64(23)
+    token = SecureRandom.urlsafe_base64(23)
     User.where("auth_token = ?", token).exists? ? generate_token : token
   end
 
