@@ -35,8 +35,13 @@ button.user_index_follow {
   font: -webkit-small-control;
   padding: 2px;
   background-color: white;
+  resize: none;
 }
 
 .enlarge-form-input {
   height: 150px !important;
+}
+
+#meow_btn {
+  margin: -100px 0 0 -50px;
 }

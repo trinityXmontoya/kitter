@@ -1,5 +1,5 @@
-<%= javascript_include_tag 'tweets/new_tweet' %>
-
+<!-- <#%= javascript_include_tag 'tweets/new_tweet' %>
+ -->
 <div class="span4 left_sidebar">
 
   <div class="home_user_info row span12">
@@ -43,7 +43,7 @@
         <div id='tweet-content-text' contenteditable='true' role='text'></div>
         <div id="tweet_form_options" class='hide-me'>
           <p id="charCount">140</p>
-          <%= f.submit "Meow!", id: 'tweet-submit' %>
+          <%= f.submit "Meow!", id: 'tweet-submit', class: 'btn' %>
           <% end %>
         </div>
 
