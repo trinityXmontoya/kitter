@@ -1,4 +1,6 @@
-<%= render 'tweets/individual_tweet_template', tweet: @tweet %>
+<% cache @tweet do %>
+  <%= render 'tweets/individual_tweet_template', tweet: @tweet %>
+<% end %>
 
 Favorites:<%= @tweet.num_of_favs %>
 Retweets: <%= @tweet.num_of_retweets %>
@@ -10,5 +12,7 @@ Retweets: <%= @tweet.num_of_retweets %>
 <% end %>
 
 <% @replies.each do |reply| %>
-  <%= render 'tweets/individual_tweet_template', tweet: reply.reply_tweet %>
+  <% cache reply do %>
+    <%= render 'tweets/individual_tweet_template', tweet: reply.reply_tweet %>
+  <% end %>
 <% end %>

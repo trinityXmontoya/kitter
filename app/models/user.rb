@@ -29,12 +29,15 @@
 
   validates :email, correct_email_format: true
 
+  after_commit :flush_cache
+
   # set user_id to username for more readable urls
   def to_param
     username
   end
 
-  # LOGIN AUTH
+  # TODO UPGRADE TO 'VALID UNTIL'
+  # LOGIN AUTH ----------------
   def send_login_link
     self.reset_auth_token
     link = "login/" + self.username + "/" + self.auth_token
@@ -61,7 +64,7 @@
     User.where("auth_token = ?", token).exists? ? generate_token : token
   end
 
-  # TWEET ACTIONS
+  # TWEET ACTIONS ----------------
   def follow(other_user)
     other_user.followers << self
     other_user.notifications.create!(tweet_id: 0, poster_id: id, kind: 'followed')
@@ -116,10 +119,35 @@
 
   def tweet_replies
     replies = []
-    tweets.each do |tweet|
+    tweets.includes(:replies).each do |tweet|
       replies << tweet.replies
     end
     return replies
+  end
+
+  # def potential_followees(given_user,num)
+  #    User.all.reject {|user| user.followings.include?(given_user)}.sample(num)
+  # end
+
+  #CACHING ----------------
+  def self.cached_find(username)
+    Rails.cache.fetch([name,username]) {find_by_username(username)}
+  end
+
+  def flush_cache
+    Rails.cache.delete([self.class.name, username])
+  end
+
+  def cached_tweets_size
+    Rails.cache.fetch([self, "tweets_size"]) {tweets.size}
+  end
+
+  def cached_followings_size
+    Rails.cache.fetch([self, "followers_size"]) {followers.size}
+  end
+
+  def cached_followers_size
+    Rails.cache.fetch([self, "followings_size"]) {followings.size}
   end
 
 end

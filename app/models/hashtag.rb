@@ -18,4 +18,9 @@ class Hashtag < ActiveRecord::Base
     content
   end
 
+  #CACHING ----------------
+  def self.cached_top_ten
+    Rails.cache.fetch([name]) { order('num_of_times_used DESC').limit(10)}
+  end
+
 end

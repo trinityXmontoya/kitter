@@ -1,5 +1,7 @@
 <h3>Favorites</h3>
   <% @favorites.each do |favorite| %>
-    <%= render 'tweets/individual_tweet_template', tweet: favorite %>
+    <% cache favorite do %>
+      <%= render 'tweets/individual_tweet_template', tweet: favorite %>
+    <% end %>
   <% end %>
 

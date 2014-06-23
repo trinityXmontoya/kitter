@@ -15,7 +15,7 @@
           <li>
             Tweets
             <br>
-            <span class="numbers"><%= @user.tweets.length%></span>
+            <span class="numbers"><%= @user.cached_tweets_size %></span>
           </li>
       <% end%>
 
@@ -23,7 +23,7 @@
         <li>
           Following
           <br>
-          <span class="numbers"><%= @user.followers.length %></span>
+          <span class="numbers"><%= @user.cached_followers_size %></span>
         </li>
       <% end%>
 
@@ -31,7 +31,7 @@
         <li>
           Followers
           <br>
-          <span class="numbers"><%=@user.followings.length%></span>
+          <span class="numbers"><%=@user.cached_followings_size %></span>
         </li>
       <% end%>
         </div>
@@ -90,8 +90,10 @@
 
   <div class="right_sidebar span9">
     <h2>Tweets</h2>
-      <% @tweets.includes(:user).each do |tweet| %>
-        <%= render 'tweets/individual_tweet_template', tweet: tweet %>
-      <%end%>
+      <% @tweets.each do |tweet| %>
+        <% cache tweet do %>
+          <%= render 'tweets/individual_tweet_template', tweet: tweet %>
+        <% end %>
+      <% end %>
   </div><!-- .right_sidebar -->
 </div><!-- span6 -->

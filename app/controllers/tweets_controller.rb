@@ -8,13 +8,13 @@ class TweetsController < ApplicationController
   end
 
   def new
-    @user=User.find_by_username(params[:user_id])
+    @user=User.cached_find(params[:user_id])
     @tweet=Tweet.new
     @path=[@user,@tweet]
   end
 
   def create
-    @user=User.find_by_username(params[:user_id])
+    @user=User.cached_find(params[:user_id])
     @tweet = @user.tweets.new(content: tweet_params[:content])
     if @tweet.save!
       redirect_to tweet_path(@tweet), notice: "Successfully created!"

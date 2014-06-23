@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user=User.find_by_username(params[:id])
+    @user=User.cached_find(params[:id])
     retweets = @user.retweeted_tweets
     @tweets=(@user.tweets.includes(:user)+retweets)
     @tweets=@tweets.sort_by{|tweet| tweet.updated_at}.reverse
@@ -30,24 +30,24 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user=User.find_by_username(params[:id])
+    @user=User.cached_find(params[:id])
   end
 
   def update
-    @user=User.find_by_username(params[:id])
+    @user=User.cached_find(params[:id])
     @user.update(user_params)
     redirect_to @user
   end
 
   def destroy
-    @user=User.find_by_username(params[:id])
+    @user=User.cached_find(params[:id])
     session[@user.id]=nil
     @user.destroy
     redirect_to root_path
   end
 
   def notifications
-    @user=User.find_by_username(params[:user_id])
+    @user=User.cached_find(params[:user_id])
     notifications=@user.notifications
     replies = @user.tweet_replies
     @all_notifications = (notifications + replies)
@@ -61,14 +61,14 @@ class UsersController < ApplicationController
   end
 
   def followers
-    @user=User.find_by_username(params[:user_id])
+    @user=User.cached_find(params[:user_id])
     init_const_vars
     @followers = @user.followers
     render_user_static_layout
   end
 
   def following
-    @user=User.find_by_username(params[:user_id])
+    @user=User.cached_find(params[:user_id])
     puts @user.followings
     @followings = @user.followings
     init_const_vars
@@ -76,7 +76,7 @@ class UsersController < ApplicationController
   end
 
   def favorites
-    @user = User.find_by_username(params[:user_id])
+    @user = User.cached_find(params[:user_id])
     @favorites = @user.favorited_tweets.order(updated_at: :desc)
     init_const_vars
     render_user_static_layout
@@ -86,25 +86,25 @@ class UsersController < ApplicationController
   end
 
   def follow
-    other_user = User.find_by_username(params[:user_id])
+    other_user = User.cached_find(params[:user_id])
     current_user.follow(other_user)
     redirect_to other_user, notice: "You are now following #{other_user.username}! Good luck."
   end
 
   def unfollow
-    other_user = User.find_by_username(params[:user_id])
+    other_user = User.cached_find(params[:user_id])
     current_user.unfollow(other_user)
     redirect_to other_user, notice: "Congratulations. You have unfollowed #{other_user.username}."
   end
 
   def block
-    other_user = User.find_by_username(params[:user_id])
+    other_user = User.cached_find(params[:user_id])
     current_user.block(other_user)
     redirect_to other_user, notice: "You have blocked #{other_user.username}, finally."
   end
 
   def unblock
-    other_user = User.find_by_username(params[:user_id])
+    other_user = User.cached_find(params[:user_id])
     current_user.unblock(other_user)
     redirect_to other_user, notice: "You have unblocked #{other_user.username}! Good to see you two getting back together."
   end
@@ -115,7 +115,7 @@ class UsersController < ApplicationController
   end
 
   def init_const_vars
-    @hashtags = Hashtag.all.order(num_of_times_used: :desc)
+    @hashtags = Hashtag.cached_top_ten
     @path = @user, Tweet.new
     puts "About to sort through users"
     users = User.all.reject {|user| @user.followings.include?(user)}

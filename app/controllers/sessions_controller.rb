@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     if params[:type] == 'email'
       user = User.find_by_email(params[:user][:email])
     elsif params[:type] == 'username'
-      user = User.find_by_username(params[:user][:username])
+      user = User.cached_find(params[:user][:username])
     end
     respond_to do |format|
       if current_user && current_user == user
@@ -23,7 +23,7 @@ class SessionsController < ApplicationController
     if lookup.include? '@'
       @user = User.find_by(email: params[:user_id])
     else
-      @user = User.find_by(username: params[:user_id])
+      @user = User.cached_find(params[:user_id])
     end
     if @user
       @user.send_login_link
@@ -34,9 +34,9 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(username: params[:user_id])
+    @user = User.cached_find(params[:user_id])
     if @user && @user.validate_token(params[:auth_token])
-      session[:user_id] = @user.id
+      session[:user_id] = @user.username
       redirect_to root_path, notice: "Welcome " + @user.username
     else
       redirect_to root_path, notice: "Error logging in.\nPerhaps your login link expired!\nYou can resend yourself one below."

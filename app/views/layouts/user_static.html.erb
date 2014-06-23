@@ -87,7 +87,7 @@
         <div class="user_info">
           TWEETS
           <br>
-           <%= @user.tweets.length%>
+           <%= @user.cached_tweets_size %>
         </div>
         <% end%>
 
@@ -95,7 +95,7 @@
         <div class="user_info">
           FOLLOWING
           <br>
-          <%= @user.followings.length %>
+          <%= @user.cached_followings_size %>
         </div>
         <% end%>
 
@@ -103,7 +103,7 @@
         <div class="user_info">
           FOLLOWERS
           <br>
-          <%=@user.followers.length%>
+          <%=@user.cached_followers_size%>
         </div>
         <% end%>
 

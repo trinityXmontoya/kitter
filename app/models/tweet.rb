@@ -1,7 +1,7 @@
 require 'embedly'
 
 class Tweet < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user, touch: true
   has_many :replies, foreign_key: 'original_tweet_id', dependent: :destroy
   has_many :retweets, dependent: :destroy
 
@@ -22,7 +22,7 @@ class Tweet < ActiveRecord::Base
   end
 
   def contains_hashtag
-    content.include? "(/#\w{1,}/)"
+    content.include? "(/#([a-zA-Z]|\d)+/)"
   end
 
   def find_and_delete_hashtags
@@ -85,7 +85,7 @@ class Tweet < ActiveRecord::Base
 
   def find_hashtags(string)
     string.split.each do |word|
-      if word.match(/#\w{1,}/)
+      if word.match(/#([a-zA-Z]|\d)+/)
         orig_word=word
         word=word.delete("#")
         hashtag=Hashtag.find_by(content: word.downcase)
@@ -99,7 +99,7 @@ class Tweet < ActiveRecord::Base
     def find_mentions(string)
     string.split.each do |word|
       if word.match(/@\w{1,}/)
-        user=User.find_by_username((word.delete("@")))
+        user=User.cached_find((word.delete("@")))
         if user
         string.sub!(word,"<a href='/users/#{user.username}'>#{word}</a>")
         end
@@ -126,6 +126,10 @@ class Tweet < ActiveRecord::Base
 
   def original_tweet_replied_to
     Reply.where(reply_tweet_id: id).first.original_tweet
+  end
+
+  #CACHING ----------------
+  def a
   end
 
 end

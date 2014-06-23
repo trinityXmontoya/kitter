@@ -38,7 +38,11 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem "bullet", :group => "development"
+gem 'chosen-rails'
+gem 'twitter-bootstrap-rails'
+gem "haml"
+gem 'embedly'
+gem 'dotenv-rails'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0.beta'
@@ -49,12 +53,13 @@ group :development, :test do
   gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 end
 
-gem 'chosen-rails'
-gem 'twitter-bootstrap-rails'
-gem "haml"
-gem 'embedly'
-gem 'dotenv-rails'
+#PERFORMANCE
+gem "bullet", :group => "development"
+gem 'rack-mini-profiler'
+# gem 'actionpack-page_caching'
+# gem 'actionpack-action_caching'
 
+#HEROKU
 gem 'rails_12factor', group: :production
 gem 'unicorn'
 ruby '2.1.0'
