@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   def show
     @user=User.find_by_username(params[:id])
     retweets = @user.retweeted_tweets
-    @tweets=(@user.tweets+retweets)
+    @tweets=(@user.tweets.includes(:user)+retweets)
     @tweets=@tweets.sort_by{|tweet| tweet.updated_at}.reverse
     init_const_vars
     render_user_static_layout
@@ -51,10 +51,10 @@ class UsersController < ApplicationController
     notifications=@user.notifications
     replies = @user.tweet_replies
     @all_notifications = (notifications + replies)
-    puts "REPLIES"
-    puts replies
-    puts "NOTIFICATIONS"
-    puts @all_notifications
+    # puts "REPLIES"
+    # puts replies
+    # puts "NOTIFICATIONS"
+    # puts @all_notifications
     # puts @all_notifications.each {|n| n}
     # @all_notifications = (notifications + replies).sort_by{|notification| notification.updated_at}.reverse
 

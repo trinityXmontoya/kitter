@@ -79,7 +79,7 @@
     </div>
 
     <div class="sidebar_footer sidebar row span12">
-       <a href="www.trinitymontoya.com">&copy; Trinity Montoya 2014</a>
+       <a href="http://www.trinitymontoya.com">&copy; Trinity Montoya 2014</a>
     </div>
 
 </div><!--/span-->
@@ -90,7 +90,7 @@
 
   <div class="right_sidebar span9">
     <h2>Tweets</h2>
-      <% @tweets.each do |tweet| %>
+      <% @tweets.includes(:user).each do |tweet| %>
         <%= render 'tweets/individual_tweet_template', tweet: tweet %>
       <%end%>
   </div><!-- .right_sidebar -->

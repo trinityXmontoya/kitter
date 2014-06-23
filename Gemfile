@@ -38,6 +38,7 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem "bullet", :group => "development"
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0.beta'
@@ -48,10 +49,8 @@ group :development, :test do
   gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 end
 
-#Twitter Bootstrap
-
-gem 'twitter-bootstrap-rails'
 gem 'chosen-rails'
+gem 'twitter-bootstrap-rails'
 gem "haml"
 gem 'embedly'
 gem 'dotenv-rails'

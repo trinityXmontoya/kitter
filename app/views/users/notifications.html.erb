@@ -27,7 +27,7 @@
       <%= link_to notification.poster.name, notification.poster %> followed you!
     <% end %>
   <% else %>
-    <% notification.each do |n| %>
+    <% notification.includes(:replies).each do |n| %>
     <%= render 'tweets/individual_tweet_template', tweet: n.reply_tweet %>
     <%end%>
   <% end %>

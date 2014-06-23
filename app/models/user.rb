@@ -108,7 +108,7 @@
 
   def followings
     followings = []
-    Follow.where(follower_id: id).each do |follow|
+    Follow.where(follower_id: id).includes(:user).each do |follow|
       followings << follow.user
     end
     return followings
