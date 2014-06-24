@@ -1,16 +1,12 @@
-ActionMailer::Base.delivery_method = :smtp
-ActionMailer::Base.perform_deliveries = true
-ActionMailer::Base.raise_delivery_errors = true
-ActionMailer::Base.default_url_options = {host: 'http://www.kitter.cat'}
-# ActionMailer::Base.default_url_options = {host: 'localhost:3000'}
-
-
-ActionMailer::Base.smtp_settings = {
-      :address              => "smtp.gmail.com",
-      :port                 => 587,
-      :domain               => "gmail.com",
-      :user_name            =>  ENV['EMAIL_USERNAME'],
-      :password             =>  ENV['EMAIL_PASSWORD'],
-      :authentication       => "plain",
-      :enable_starttls_auto => true
+Pony.options = {
+  :via => :smtp,
+  :via_options => {
+    :address => 'smtp.sendgrid.net',
+    :port => '587',
+    :domain => 'heroku.com',
+    :user_name => ENV['SENDGRID_USERNAME'],
+    :password => ENV['SENDGRID_PASSWORD'],
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
 }

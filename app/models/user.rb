@@ -1,5 +1,7 @@
  class User < ActiveRecord::Base
 
+include Rails.application.routes.url_helpers
+
   has_many :tweets, dependent: :destroy
 
   has_many :replies, dependent: :destroy
@@ -40,9 +42,14 @@
   # LOGIN AUTH ----------------
   def send_login_link
     self.reset_auth_token
-    link = "login/" + self.username + "/" + self.auth_token
-    UserMailer.send_user_token(self,link).deliver
+    link = root_path + "login/" + self.username + "/" + self.auth_token
+    Pony.mail(to: self.email, subject: "Login", body: msg_body(link) )
     self.update_attributes(login_link_sent: Time.now)
+  end
+
+  def login_msg_body(login_link)
+    "Hey #{self.username.capitalize}, here's your login link: #{login_link}.
+  Requested on #{self.auth_token_created_at}. If not used it will expire in 2 minutes for safety reasons. Read more about our login-process #{root_path}"
   end
 
   def reset_auth_token

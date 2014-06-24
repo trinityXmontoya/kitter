@@ -53,6 +53,10 @@ group :development, :test do
   gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 end
 
+# MAIL
+gem 'pony'
+gem 'sendgrid'
+
 #PERFORMANCE
 gem "bullet", :group => "development"
 gem 'rack-mini-profiler'

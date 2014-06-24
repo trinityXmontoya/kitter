@@ -112,6 +112,8 @@ GEM
     oauth (0.4.7)
     pg (0.17.1)
     polyglot (0.3.4)
+    pony (1.9)
+      mail (>= 2.0)
     pry (0.9.12.6)
       coderay (~> 1.0)
       method_source (~> 0.8)
@@ -175,6 +177,8 @@ GEM
     sdoc (0.4.0)
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
+    sendgrid (1.2.0)
+      json
     shoulda-matchers (2.5.0)
       activesupport (>= 3.0.0)
     slop (3.5.0)
@@ -228,6 +232,7 @@ DEPENDENCIES
   jquery-rails
   paperclip!
   pg
+  pony
   pry-rails
   rack-mini-profiler
   rails (= 4.0.4)
@@ -235,6 +240,7 @@ DEPENDENCIES
   rspec-rails (~> 3.0.0.beta)
   sass-rails (~> 4.0.2)
   sdoc
+  sendgrid
   shoulda-matchers
   turbolinks
   twitter-bootstrap-rails
