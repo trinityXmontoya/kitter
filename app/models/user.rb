@@ -43,7 +43,7 @@ include Rails.application.routes.url_helpers
   def send_login_link
     self.reset_auth_token
     link = root_path + "login/" + self.username + "/" + self.auth_token
-    Pony.mail(to: self.email, subject: "Login", body: msg_body(link) )
+    Pony.mail(to: self.email, subject: "Login", body: login_msg_body(link) )
     self.update_attributes(login_link_sent: Time.now)
   end
 
