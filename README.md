@@ -16,7 +16,8 @@ This project was conceptualized, scoped and developed in one week.
 3. Run `bundle`
 4. Run `touch .env` from your terminal or create a `.env` file.
 5. Add `.env` to your `.gitignore` file
-  This app requires a `.env` file to store your environment variables. The `dotenv-rails gem` will load the variables from your `.env` file into the app when it is first loaded.
+
+ (This app requires a `.env` file to store your environment variables. The `dotenv-rails gem` will load the variables from your `.env` file into the app when it is first loaded.)
 6. You will need to declare a variable for your email configuration (the email account that will send out the passwordless login link to users).
 
   Your `.env` file should look as follows:
@@ -26,4 +27,5 @@ This project was conceptualized, scoped and developed in one week.
   EMAIL_PASSWORD=XXXX
   ```
 7. run `rails s`
+
 The app will now be running at [localhost:3000](http://localhost:3000)
