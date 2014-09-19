@@ -5,8 +5,8 @@ class ShortLink < ActiveRecord::Base
   def generate_short_url
     puts "Generating url"
     path = SecureRandom.urlsafe_base64(6)
-    # puts path
-    # ShortLink.where("short_url_path = ?", path).exists? ? generate_short_url : path
+    ShortLink.exists?(short_url_path: path) ? generate_short_url : path
+    self.update_column(:short_url_path, path)
   end
 
 end
