@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140619073807) do
+ActiveRecord::Schema.define(version: 20140919070001) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,8 @@ ActiveRecord::Schema.define(version: 20140619073807) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.string   "video_url"
+    t.boolean  "has_hashtags",        default: false
+    t.boolean  "has_mentions",        default: false
   end
 
   add_index "tweets", ["user_id"], name: "index_tweets_on_user_id", using: :btree
@@ -102,18 +104,20 @@ ActiveRecord::Schema.define(version: 20140619073807) do
     t.string   "username"
     t.string   "name"
     t.string   "email"
-    t.string   "background_photo_url",  default: "http://static2.grsites.com/archive/textures/ss/ss013.jpg"
-    t.string   "profile_photo_url",     default: "http://img2.wikia.nocookie.net/__cb20130302002623/glee/images/5/50/20120814044316!Pusheen.png"
+    t.string   "background_photo_url", default: "http://static2.grsites.com/archive/textures/ss/ss013.jpg"
+    t.string   "profile_photo_url",    default: "http://img2.wikia.nocookie.net/__cb20130302002623/glee/images/5/50/20120814044316!Pusheen.png"
     t.string   "bio"
     t.string   "website"
-    t.boolean  "verified",              default: false
     t.string   "location"
     t.integer  "country_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "auth_token"
-    t.datetime "auth_token_created_at"
     t.datetime "login_link_sent"
   end
+
+  add_index "users", ["auth_token"], name: "index_users_on_auth_token", using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", using: :btree
 
 end

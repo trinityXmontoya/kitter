@@ -1,11 +1,11 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
+# # This file should contain all the record creation needed to seed the database with its default values.
+# # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
+# #
+# # Examples:
+# #
+# #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
+# #   Mayor.create(name: 'Emanuel', city: cities.first)
 #
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-
 # User.create(
 #     username: "felixthecat",
 #     name: "Felix",
@@ -16,11 +16,9 @@
 #     website: "http://www.felixthecat.com/",
 #     verified: true,
 #     location: "NYC",
-#     password: "password",
-#     password_confirmation: "password",
 #     country_id: 1)
-
-
+#
+#
 # User.create(
 #     username: "therealpusheen",
 #     name: "pusheen",
@@ -31,10 +29,8 @@
 #     website: "http://pusheen.com/",
 #     verified: true,
 #     location: "Park Ridge, Illinois",
-#     password: "password",
-#     password_confirmation: "password",
 #     country_id: 1)
-
+#
 #   User.create(
 #         username: "garfield",
 #         name: "Garfield",
@@ -45,10 +41,9 @@
 #         website: "http://garfield.com/",
 #         verified: false,
 #         location: "Marion, Indiana",
-#         password: "password",
-#         password_confirmation: "password",
+#
 #         country_id: 1)
-
+#
 # User.create(
 #     username: "PussInBoots",
 #     name: "Master Cat",
@@ -59,10 +54,8 @@
 #     website: "http://www.pussinbootsthemovie.com/",
 #     verified: true,
 #     location: "Glendale, CA",
-#     password: "password",
-#     password_confirmation: "password",
 #     country_id: 1)
-
+#
 #   User.create(
 #       username: "hellokitty",
 #       name: "kitty",
@@ -73,11 +66,9 @@
 #       website: "http://pusheen.com/",
 #       verified: true,
 #       location: "NYC",
-#       password: "password",
-#       password_confirmation: "password",
 #       country_id: 1)
-
-
+#
+#
 # Tweet.create(
 #   content: "where is john with my lasagna?" ,
 #   user_id: 3 ,
@@ -86,7 +77,7 @@
 #   num_of_favs: 10,
 #   num_of_retweets: 2
 #   )
-
+#
 # Tweet.create(
 #   content: "what does it take to get a lasagna in here!" ,
 #   user_id: 3,
@@ -95,7 +86,7 @@
 #   num_of_favs: 5 ,
 #   num_of_retweets: 5
 #   )
-
+#
 # Tweet.create(
 #   content: "My name will become legend..." ,
 #   user_id: 4,
@@ -104,7 +95,7 @@
 #   num_of_favs: 3,
 #   num_of_retweets: 11
 #   )
-
+#
 # Tweet.create(
 #   content: "Holy frijoles!" ,
 #   user_id: 4 ,
@@ -113,7 +104,7 @@
 #   num_of_favs: 5,
 #   num_of_retweets: 2
 #   )
-
+#
 # Tweet.create(
 #   content: "Who let all these cats out?" ,
 #   user_id: 7 ,
@@ -122,7 +113,7 @@
 #   num_of_favs: 5 ,
 #   num_of_retweets: 1
 #   )
-
+#
 # Tweet.create(
 #   id: 90,
 #   content: "What do you guys feel about letting #dogs on the site?" ,
@@ -132,7 +123,7 @@
 #   num_of_favs: 0 ,
 #   num_of_retweets: 10
 #   )
-
+#
 # Tweet.create(
 #   id: 91,
 #   content: "@trinity Allowing #DOGS ?!?!?! That's treason!" ,
@@ -142,7 +133,7 @@
 #   num_of_favs: 24 ,
 #   num_of_retweets: 3
 #   )
-
+#
 #   Reply.create(
 #     original_tweet_id: 90 ,
 #     reply_tweet_id: 91 ,
@@ -167,9 +158,9 @@
 #     created_at: '2014-06-10 15:41:03 -0400',
 #     updated_at: '2014-06-10 15:41:03 -0400'
 #     )
-
-
-
+#
+#
+#
 # Tweet.create(
 #   id: 93,
 #   content: "Guys, #dogs aren't that bad..." ,
@@ -179,7 +170,7 @@
 #   num_of_favs: 1 ,
 #   num_of_retweets: 1
 #   )
-
+#
 # Tweet.create(
 #   id: 94,
 #   content: "yeah really @kitty you gotta relax" ,
@@ -189,20 +180,20 @@
 #   num_of_favs: 5 ,
 #   num_of_retweets: 1
 #   )
-
-Tweet.create(
-  id: 95,
-  content: "@trinity Seriously, who let you on this site?" ,
-  user_id: 5 ,
-  created_at: '2014-06-10 15:41:03 -0400',
-  updated_at: '2014-06-10 15:41:03 -0400',
-  num_of_favs: 8 ,
-  num_of_retweets: 2
-  )
-
-   Reply.create(
-    original_tweet_id: 90 ,
-    reply_tweet_id: 95 ,
-    created_at: '2014-06-10 15:41:03 -0400',
-    updated_at: '2014-06-10 15:41:03 -0400'
-    )
+#
+# Tweet.create(
+#   id: 95,
+#   content: "@trinity Seriously, who let you on this site?" ,
+#   user_id: 5 ,
+#   created_at: '2014-06-10 15:41:03 -0400',
+#   updated_at: '2014-06-10 15:41:03 -0400',
+#   num_of_favs: 8 ,
+#   num_of_retweets: 2
+#   )
+#
+#    Reply.create(
+#     original_tweet_id: 90 ,
+#     reply_tweet_id: 95 ,
+#     created_at: '2014-06-10 15:41:03 -0400',
+#     updated_at: '2014-06-10 15:41:03 -0400'
+#     )
