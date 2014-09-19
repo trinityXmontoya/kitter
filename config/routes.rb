@@ -1,34 +1,25 @@
 Kitter::Application.routes.draw do
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
 
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
-
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
+  # HOME PAGE
   root 'main#welcome'
 
+  # FAQ
+  get '/faq' => 'main#faq'
+
+  # URL SHORTENER
   get '/s/*path' => 'short_links#redirect'
 
+  # SESSIONS & SIGNUP
   get '/validate_input/*type' => 'sessions#validate_input'
-
   get '/login' => 'sessions#new'
-  post '/login/*user_id/send_login_link' => 'sessions#request_token', as: :request_token
+  post '/login/request_token' => 'sessions#request_token', as: :request_token
   get '/login/:user_id/*auth_token' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
 
+  # USERS
+  get '/signup' => 'users#signup'
 
-  get '/faq' => 'main#faq'
-
-  resources :users, only:[:index,:show,:create,:edit,:update,:destroy] do
+  resources :users, except:[:new] do
     get '/favorites' => 'users#favorites'
     get '/followers' => 'users#followers'
     get '/following' => 'users#following'
@@ -46,8 +37,7 @@ Kitter::Application.routes.draw do
     end
   end
 
-  get '/signup' => 'users#signup'
-
+  # HASHTAGS
   get '/hashtags/:hashtag' => 'hashtags#show', as: :hashtag
   get '/discover' => 'hashtags#index', as: :hashtag_discover
 

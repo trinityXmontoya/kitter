@@ -4,7 +4,7 @@ include Rails.application.routes.url_helpers
 
   has_many :tweets, dependent: :destroy
 
-  has_many :replies, dependent: :destroy
+  has_many :replies, through: :tweets, class_name: "Tweet", source: :tweet, foreign_key: 'reply_tweet_id'
 
   has_many :retweets, dependent: :destroy
   has_many :retweeted_tweets, through: :retweets, class_name: "Tweet", source: :tweet
@@ -41,22 +41,26 @@ include Rails.application.routes.url_helpers
   # TODO UPGRADE TO 'VALID UNTIL'
   # LOGIN AUTH ----------------
   def send_login_link
-    self.reset_auth_token
+    reset_auth_token
     link = root_path + "login/" + self.username + "/" + self.auth_token
     Pony.mail(to: self.email, subject: "Login", body: login_msg_body(link) )
-    self.update_attributes(login_link_sent: Time.now)
+    update_attribute(:login_link_sent, Time.now)
+  end
+
+  def reset_auth_token
+    update_attribute(:auth_token, generate_token)
+  end
+
+  def generate_token
+    token = SecureRandom.urlsafe_base64(23)
+    User.exists?(auth_token: token) ? generate_token : token
   end
 
   def login_msg_body(login_link)
     "Hey #{self.username.capitalize}, here's your login link: #{login_link}.
-  Requested on #{self.auth_token_created_at}. If not used it will expire in 2 minutes for safety reasons. Read more about our login-process #{root_path}"
+  Requested on #{self.login_link_sent}. If not used it will expire in 2 minutes for safety reasons. Read more about our login-process #{root_path}"
   end
 
-  def reset_auth_token
-    self.update_attributes(auth_token: self.generate_token)
-    self.update_attributes(auth_token_created_at: Time.now)
-    self.save
-  end
 
   def validate_token(token)
     ((token == self.auth_token) && (self.token_is_not_expired)) ? true : false
@@ -66,10 +70,6 @@ include Rails.application.routes.url_helpers
     ((Time.now-self.login_link_sent) /1.hour) < 2
   end
 
-  def generate_token
-    token = SecureRandom.urlsafe_base64(23)
-    User.where("auth_token = ?", token).exists? ? generate_token : token
-  end
 
   # TWEET ACTIONS ----------------
   def follow(other_user)
@@ -142,6 +142,8 @@ include Rails.application.routes.url_helpers
   end
 
   def flush_cache
+    puts "cache flushing"
+    puts "woot"
     Rails.cache.delete([self.class.name, username])
   end
 

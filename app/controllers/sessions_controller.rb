@@ -21,15 +21,15 @@ class SessionsController < ApplicationController
   def request_token
     lookup = params[:user_id]
     if lookup.include? '@'
-      @user = User.find_by(email: params[:user_id])
+      @user = User.cached_find_by(email: lookup)
     else
-      @user = User.cached_find(params[:user_id])
+      @user = User.cached_find(lookup)
     end
     if @user
       @user.send_login_link
       redirect_to login_path, notice: "#{@user.username.capitalize} your email was sent!"
     else
-      redirect_to login_path, notice: "Whoops! Looks like #{lookup} is registered on this site."
+      redirect_to login_path, notice: "Whoops! Looks like #{lookup} is not registered on this site. Please check spelling or signup!"
     end
   end
 
@@ -39,7 +39,7 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.username
       redirect_to root_path, notice: "Welcome " + @user.username
     else
-      redirect_to root_path, notice: "Error logging in.\nPerhaps your login link expired!\nYou can resend yourself one below."
+      redirect_to login_path, notice: "Error logging in.\nPerhaps your login link expired!\nYou can resend yourself one below."
     end
   end
 

@@ -1,22 +1,23 @@
-<%= javascript_include_tag 'sessions/login' %>
-
-<div id="login_wrapper">
-    <h1>Login</h1>
-
-    <div class="errors">
+<div>
+  <div class="errors">
     <%= flash[:notice] %>
-    </div>
-
-
+  </div>
+  <h1>Login</h1>
   <div id="sign-up">
-    <div class="sign-up-directions">
-      Enter your username or email!!
-    </div>
-
     <div id="sign-up-form">
-      <%= form_tag request_token_path(user_id: 0), id:'login-form' do %>
-        <%= text_field_tag :user_id %>
+      <%= form_tag request_token_path, id:'login-form' do %>
+        <%= text_field_tag :user_id, nil,placeholder: "Username or email" %>
+        <br>
+        <%= button_tag "Send Login Link"%>
       <% end %>
     </div>
   </div>
+  <%= link_to "Read more about our passwordless login here", faq_path %>
 </div>
+
+
+<script charset="utf-8">
+  $(document).ready( function(){
+    $("#login-form").validate({ rules: { user_id: "required" } });
+  })
+</script>
