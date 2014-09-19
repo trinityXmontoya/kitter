@@ -37,9 +37,8 @@ class Tweet < ActiveRecord::Base
     find_links(content) && find_hashtags(content) && find_mentions(content)
   end
 
-   def find_links(string)
-    string.split.each do |word|
-      puts uri?(word)
+  def find_links(string)
+    string.split.each_with_index do |word,i|
       if uri?(word)
         string << embed_media(word)
         short_url = shorten_url(word)
@@ -62,6 +61,7 @@ class Tweet < ActiveRecord::Base
   def embed_media(url)
     embedly_api = Embedly::API.new :key => '1417d995b5a74c61b647102980df6107'
     obj = (embedly_api.oembed :url => url)[0]
+    puts obj
     if obj[:type]=='video'
       obj[:html] if obj[:type]=='video'
     elsif obj[:type]=='photo'
@@ -75,7 +75,7 @@ class Tweet < ActiveRecord::Base
   end
 
   def shorten_url(url)
-    new_link = ShortLink.find_or_create_by_orig_url(url)
+    new_link = ShortLink.find_or_create_by(orig_url: url)
     return 'http://localhost:3000' + '/s/' + new_link.short_url_path
   end
 
