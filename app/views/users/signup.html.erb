@@ -1,6 +1,6 @@
 <%= javascript_include_tag 'users/signup' %>
 
-<h1>Join Kitter Today</h1>
+<h2>Join Kitter Today.</h2>
 
 <% if flash[:notice] %>
   <%= flash[:notice] %>
@@ -38,6 +38,6 @@
     <%= f.text_field :username, type: 'text', class: 'form-control'%>
     </div>
 
-    <%= f.submit class: 'btn' %>
+    <%= f.submit "Create my account",class: 'btn' %>
   <% end %>
 </div><!-- end signup form-->

@@ -39,39 +39,23 @@
 
   </head>
   <body>
+    <%= nav_bar :fixed => :top, :brand => image_tag('kitter.png', class: 'nav_icon'), :responsive => false do %>
+      <%= menu_group :pull => :right do %>
+        <% if current_user %>
+            <%= menu_item image_tag('notification.png', class: 'nav_icon')+"Notifications", user_notifications_path(current_user)%>
+            <%= menu_item image_tag('hashtag.png', class: 'nav_icon') + "Discover", hashtag_discover_path %>
+            <%= menu_item image_tag('kitter.png', class: 'nav_icon')+"You", user_path(current_user)%>
+            <%= menu_item image_tag('settings.png', class: 'nav_icon'), edit_user_path(current_user)%></li>
+            <li class="right" data-toggle="modal" data-target="#newTweetModal"><%= image_tag('write.png', class: 'nav_icon') %>
+            <%= menu_item "Logout", logout_path %></li>
+        <% else %>
+          <%= drop_down "Have an account? Sign in <i class='fa fa-caret-down'></i>".html_safe do %>
+            <%= render 'sessions/_new' %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
 
-    <div class="navbar navbar-fluid-top">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-          <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <li class='brand'><%= link_to "Kitter #{image_tag('kitter.png')}".html_safe, root_path%></li>
-          <div class="container-fluid nav-collapse">
-            <ul class="nav">
-
-
-              <% unless current_user %>
-              <li><%= link_to "Login", login_path%></li>
-              <li><%= link_to "Sign Up", signup_path%></li>
-                  <% end %>
-
-                  <% if current_user %>
-              <li><%= link_to image_tag('notification.png', class: 'nav_icon')+"Notifications", user_notifications_path(current_user)%></li>
-              <li><%= link_to image_tag('hashtag.png', class: 'nav_icon') + "Discover", hashtag_discover_path %></li>
-              <li><%= link_to image_tag('kitter.png', class: 'nav_icon')+"You", user_path(current_user)%></li>
-              <li class="right"><%= link_to image_tag('settings.png', class: 'nav_icon'), edit_user_path(current_user)%></li>
-              <li class="right" data-toggle="modal" data-target="#newTweetModal"><%= image_tag('write.png', class: 'nav_icon') %></li>
-              <li class="right"><%= link_to "Logout", logout_path%></li>
-                  <% end %>
-
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
-    </div>
 
     <div class="container-fluid">
       <div class="row-fluid">

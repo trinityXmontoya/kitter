@@ -4,10 +4,9 @@
 /*HOME NAV*/
 #home_nav{
   background-color: whitesmoke;
-  height: 50px;
 }
 
-#home_nav li {
+/*#home_nav li {
   display: inline-block;
   padding: 5px 10px;
   text-decoration: none;
@@ -17,7 +16,6 @@
 
 .navbar .brand {
   width: 50px;
-  margin-left: -46px;
 }
 
 .brand a {
@@ -40,9 +38,10 @@ width: 95%;
 .right {
   float: right !important;
 }
+*/
 
 img.nav_icon{
-  max-width: 50px !important;
+  max-width: 30px !important;
 }
 
 /*HOME LEFT SIDEBAR*/
