@@ -4,7 +4,7 @@ class TweetsController < ApplicationController
 
   def show
     @tweet=Tweet.find(params[:id])
-    @replies = @tweet.replies
+    @replies = @tweet.replies.includes(:reply_tweet)
   end
 
   def new
