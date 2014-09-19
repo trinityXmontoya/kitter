@@ -1,20 +1,19 @@
-
 $(document).ready(function(){
  console.log("signup js loaded baby!");
- $('#signup-back').on('click', loadStep1);
- $('#signup-continue').on('click',loadStep2);
+ $('form#new_user input[type="button"][value="Next"]').click({step: 2}, loadStep);
+ $('form#new_user input[type="button"][value="Back"]').click({step: 1}, loadStep);
+ $('input[type="button"]').attr('disabled', 'disabled');
  loadValidations();
 });
 
-function loadStep1(){
-    showStep(1);
-    hideStep(2);
-};
-
-function loadStep2(){
-    showStep(2);
+function loadStep(event){
+  var step = event.data.step;
+  showStep(step);
+  if (step == 1){ hideStep(2); }
+  else if (step == 2){
     hideStep(1);
     setUsername();
+  }
 };
 
 function showStep(num){
@@ -37,7 +36,8 @@ function setUsername(){
 };
 
 function loadValidations(){
-  $("#new_user").validate({
+  var form = $("#new_user")
+  form.validate({
     debug: false,
     rules: {
       "user[email]": {required: true, email: true, remote: "/validate_input/email"},
@@ -58,9 +58,17 @@ function loadValidations(){
         required: "Username required to signup. It will be displayed as name @username",
         remote: "This name is taken"
       },
-      "user[username]": {
+      "user[website]": {
         email: "Incorrect format: must include http:// before"
       }
     }
   });
+  $('#new_user input').on('blur', function(){
+    if (form.valid()) {
+      $('input[type="button"]').attr('disabled', false);
+    } else {
+      $('input[type="button"]').attr('disabled', 'disabled');
+    }
+  })
+
 }

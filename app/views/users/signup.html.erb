@@ -1,19 +1,19 @@
-<%= javascript_include_tag 'users/sign_up' %>
+<%= javascript_include_tag 'users/signup' %>
 
 <h1>Sign Up</h1>
 
 <% if flash[:notice] %>
-<%= flash[:notice] %>
+  <%= flash[:notice] %>
 <% end %>
 <br>
 
 <div>
-<% if @user.errors.present? %>
-  <% @user.errors.full_messages.each do |msg|  %>
-    <%= msg %>
-    <br>
+  <% if @user.errors.present? %>
+    <% @user.errors.full_messages.each do |msg|  %>
+      <%= msg %>
+      <br>
+    <% end %>
   <% end %>
-<% end %>
 </div>
 
 <div id="signup-form">
@@ -33,7 +33,7 @@
     <%= f.text_field :username, type: 'text', class: 'form-control', placeholder: "Username" %>
     </div>
 
-    <div id="signup-continue" class='btn'>Continue</div>
+    <input type="button" class='btn' value="Next">
   </div><!-- end signup step 1-->
 
   <div id="signup-step-2" class='hide-me'>
@@ -71,7 +71,7 @@
     <#%= f.number_field :country_id %>
     </div> -->
 
-    <div id='signup-back' class="btn">Back</div>
+    <input type="button" class="btn" value="Back">
     <%= f.submit class: 'btn' %>
   </div><!-- end signup step 2-->
   <% end %>
