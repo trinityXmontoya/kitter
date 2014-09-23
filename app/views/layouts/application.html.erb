@@ -44,15 +44,14 @@
         <% if current_user %>
             <%= menu_item image_tag('notification.png', class: 'nav_icon')+"Notifications", user_notifications_path(current_user)%>
             <%= menu_item image_tag('hashtag.png', class: 'nav_icon') + "Discover", hashtag_discover_path %>
-            <%= menu_item image_tag('kitter.png', class: 'nav_icon')+"You", user_path(current_user)%>
-            <%= menu_item image_tag('settings.png', class: 'nav_icon'), edit_user_path(current_user)%></li>
-            <li class="right" data-toggle="modal" data-target="#newTweetModal"><%= image_tag('write.png', class: 'nav_icon') %>
-            <%= menu_item "Logout", logout_path %></li>
-        <!-- hide sign in drop down if on main page -->
-        <% elsif params[:action] != "join" %>
-          <%= drop_down "Have an account? Sign in" do %>
-            <%= render 'sessions/login' %>
-          <% end %>
+            <%= menu_item image_tag('me.png', class: 'nav_icon')+"Me", user_path(current_user)%>
+            <%= drop_down  image_tag('settings.png', class: 'nav_icon') do %>
+              <% edit_user_tab = image_tag(current_user.profile_photo_url,size:"30")+current_user.username+" | Edit your profile"%>
+              <%= menu_item edit_user_tab, edit_user_path(current_user) %>
+              <%= drop_down_divider %>
+              <%= menu_item image_tag('logout.png',size:"30")+" Logout", logout_path %>
+            <% end %>
+            <li class="right" data-toggle="modal" data-target="#newTweetModal"><%= image_tag('write.png', class: 'nav_icon') %></li>
         <% end %>
       <% end %>
     <% end %>

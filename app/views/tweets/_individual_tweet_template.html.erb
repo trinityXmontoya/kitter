@@ -1,41 +1,40 @@
-<div class="each_tweet span12">
-  <div class="tweet_user_photo" style="background-image: url(<%= tweet.user.profile_photo_url%>)"/></div>
+<div class="each_tweet">
+  <div class="user_photo" style="background-image: url(<%= tweet.user.profile_photo_url%>)"/></div>
   <div class="tweet_info">
     <p>
       <span class="username"><%=tweet.user.name%></span>
-        <%=link_to "@#{tweet.user.username}", user_path(tweet.user)%>
-        *
+        <%=link_to "@#{tweet.user.username} ", user_path(tweet.user)%>
         <%=link_to "#{time_ago_in_words(tweet.created_at)} ago", tweet_path(tweet)%>
     </p>
     <div class="tweet_content">
-      <%=tweet.content.html_safe%>
+      <%= tweet.content.html_safe %>
     </div><!-- .tweet_content-->
   </div><!-- .tweet_info-->
 
-  <div class="home_tweet_actions">
+  <ul class="tweet_actions list-inline">
     <% if tweet.is_a_reply %>
-      <%= link_to "View Conversation", tweet_path(tweet.original_tweet_replied_to) %>
+      <li><%= link_to "View Conversation", tweet_path(tweet.original_tweet_replied_to) %></li>
     <% end %>
 
-    <%= button_to "Reply", tweet_path(tweet), method: :get, class: 'btn'%>
+    <li><%= link_to '<i class="fa fa-reply"></i> Reply'.html_safe, tweet_path(tweet), method: :get, class: 'btn'%></li>
 
     <% unless current_user == tweet.user %>
       <% if current_user.retweeted_tweets.include?(tweet) %>
-        <%= button_to "Undo retweet", tweet_undo_retweet_path(tweet) , class: 'btn'%>
+        <li><%= link_to '<i class="fa fa-retweet"></i> Retweeted'.html_safe, tweet_undo_retweet_path(tweet) , class: 'btn'%></li>
       <% else %>
-        <%= button_to "Retweet", tweet_retweet_path(tweet) , class: 'btn'%>
+        <li><%= link_to '<i class="fa fa-retweet"></i> Retweet'.html_safe, tweet_retweet_path(tweet) , class: 'btn'%></li>
       <% end %>
     <% end %>
 
     <% if current_user.favorited_tweets.include?(tweet) %>
-      <%= button_to "Unfavorite", tweet_unfavorite_path(tweet) , class: 'btn'%>
+      <li><%= link_to '<i class="fa fa-star"></i> Favorited'.html_safe, tweet_unfavorite_path(tweet) , class: 'btn'%></li>
     <% else %>
-      <%= button_to "Favorite", tweet_favorite_path(tweet) , class: 'btn'%>
+      <li><%= link_to '<i class="fa fa-star"></i> Favorite'.html_safe, tweet_favorite_path(tweet) , class: 'btn'%></li>
     <% end %>
 
     <% if current_user == tweet.user %>
-      <%= button_to "Delete", tweet, method: :delete , class: 'btn' %>
+      <li><%= link_to '<i class="fa fa-trash"></i> Delete'.html_safe, tweet, method: :delete , class: 'btn' %></li>
     <% end %>
 
-  </div><!-- .home_tweet_actions -->
+  </ul><!-- .home_tweet_actions -->
 </div><!-- .each_tweet -->

@@ -17,8 +17,6 @@ Kitter::Application.routes.draw do
   get '/logout' => 'sessions#destroy'
 
   # USERS
-  get '/signup' => 'users#signup'
-
   resources :users, except:[:new] do
     get '/favorites' => 'users#favorites'
     get '/followers' => 'users#followers'

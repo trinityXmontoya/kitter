@@ -28,10 +28,10 @@ Kitter::Application.configure do
   config.assets.debug = true
 
   #BULLET CONFIG
-  config.after_initialize do
-  Bullet.enable = true
-  Bullet.alert = true
-  Bullet.rails_logger = true
-  end
+  # config.after_initialize do
+  # Bullet.enable = true
+  # Bullet.alert = true
+  # Bullet.rails_logger = true
+  # end
 
 end

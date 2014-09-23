@@ -3,7 +3,6 @@ class MainController<ApplicationController
   before_action :authenticate, only: [:welcome]
 
   def welcome
-    puts "I RANNNNNN"
     @user=current_user
     users = User.select(:profile_photo_url,:username, :name).reject {|user| @user.followings.include?(user)}
     @users=users.sample(3)

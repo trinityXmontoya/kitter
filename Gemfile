@@ -58,7 +58,7 @@ gem 'pony'
 gem 'sendgrid'
 
 #PERFORMANCE
-gem "bullet", :group => "development"
+# gem "bullet", :group => "development"
 gem 'rack-mini-profiler'
 # gem 'actionpack-page_caching'
 # gem 'actionpack-action_caching'
