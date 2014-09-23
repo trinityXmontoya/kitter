@@ -18,17 +18,13 @@ class UsersController < ApplicationController
     render_user_static_layout
   end
 
-  def signup
-    @user=User.new
-  end
-
   def create
     @user = User.create(user_params)
     if @user.save
       session[:user_id] = @user.username
       redirect_to @user, notice: "User created. Get kitting!"
     else
-      render 'signup'
+      redirect_to root_path
     end
   end
 

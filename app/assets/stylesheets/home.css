@@ -6,40 +6,6 @@
   background-color: whitesmoke;
 }
 
-/*#home_nav li {
-  display: inline-block;
-  padding: 5px 10px;
-  text-decoration: none;
-  font-size: 14px;
-
-}
-
-.navbar .brand {
-  width: 50px;
-}
-
-.brand a {
-  margin: 0 0 0 3px;
-  color: black;
-}
-
-.navbar .nav {
-  position: relative;
-left: 0;
-display: block;
-margin: 23px 0 0 30px;
-width: 95%;
-}
-
-.navbar .nav>li>a {
-  padding: 5px;
-}
-
-.right {
-  float: right !important;
-}
-*/
-
 img.nav_icon{
   max-width: 30px !important;
 }
@@ -47,194 +13,186 @@ img.nav_icon{
 /*HOME LEFT SIDEBAR*/
 
 .left_sidebar {
-  min-width: 390px;
-  max-width: 490px;
-  padding: 0 0 0 60px;
-}
-
-div.home_user_info.row.span12 {
-  margin: 0 0 0 12px;
-}
-
-
-#home_sidebar_user_info {
-  height: 194px;
-  color: black;
-  font-weight: bold;
-  text-align: center;
-  font-size: 20px;
-}
-
-#home_sidebar_user_info img {
-  max-width: 200px;
-max-height: 145px;
-margin: 25px 52px 0 52px;
-}
-
-#home_sidebar_user_info p {
-  background-color: whitesmoke;
-/*  margin: -53px 0;*/
-  padding: 2px 0;
-
-}
-
-#home_sidebar_user_stats{
-  background-color:whitesmoke;
-  text-align: center;
-}
-
-#home_sidebar_user_stats li {
-  list-style: none;
+  min-width: 290px;
+  max-width: 290px;
   display: inline-block;
-  text-transform: uppercase;
-  padding: 5px;
+  vertical-align: top;
 }
 
-.numbers {
-  font-weight: bold;
-  font-size: 23px;
-  color: green;
+.sidebar {
+  padding: 15px;
 }
 
-.num_link {
-  font-size: 13px;
+/*USER INFO*/
+.home_user_info, .sidebar {
+  background-color: whitesmoke;
+  border-radius: 6px;
+  margin-bottom: 10px;
 }
 
-
-#tweet_box {
-  background-color: rgb(188,235,222);
-  height: 70px;
-  padding: 5px 5px 10px 5px;
-  border-radius: 0 0 6px 6px;
+.home_user_info a {
+  color: black;
 }
 
-input#tweet_content {
- text-align: center;
-  padding: 8px;
-  width: 100%;
- /* margin: 3px 25px;*/
+.bg_photo {
+  height: 96px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
 }
+  .bg_photo + div {
+    margin-left: 10px;
+  }
+  .bg_photo + div img {
+    margin-top: -30px;
+    height: 70px;
+    width: 70px;
+    border: solid 1px whitesmoke;
+    display: inline-block;
+    background-color: whitesmoke;
+    border-radius: 6px;
+  }
+  .bg_photo + div p {
+    display: inline-block;
+  }
 
-input[value="Meow!"] {
-margin: 2px 28px;
-text-align: center;
-float: right;
-}
+  /*USER STATS*/
+  #home_sidebar_user_stats{
+    background-color:whitesmoke;
+    text-align: center;
+  }
 
+    #home_sidebar_user_stats li {
+      list-style: none;
+      display: inline-block;
+      text-transform: uppercase;
+      padding: 5px;
+    }
 
-.who_to_follow{
-}
+  .numbers {
+    font-weight: bold;
+    font-size: 23px;
+    color: green;
+  }
 
-.who_to_follow p {
-  font-size: 18px;
-  display: inline;
-}
+  .num_link {
+    font-size: 13px;
+  }
 
-.who_to_follow img {
-  max-height: 60px;
-  max-width: 60px;
-}
+  /*USER INFO TWEET BOX*/
+  #tweet_box {
+    background-color: rgb(188,235,222);
+    height: 70px;
+    padding: 5px 5px 10px 5px;
+    border-radius: 0 0 6px 6px;
+  }
+
+  input#tweet_content {
+   text-align: center;
+    padding: 8px;
+    width: 100%;
+   /* margin: 3px 25px;*/
+  }
+
+  input[value="Meow!"] {
+  margin: 2px 28px;
+  text-align: center;
+  float: right;
+  }
+
+/*WHO TO FOLLOW*/
 .who_to_follow_info {
   display: inline-block;
-  margin: 15px 0 0 0;
+  max-height: 48px;
+  margin-bottom: 10px;
 }
+  .who_to_follow p {
+    display: inline;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+    .who_to_follow p a {
+      color: #B6BBBA;
+    }
 
-.who_to_follow form {
-  display: inline-block;
-}
+  .who_to_follow img {
+    height: 48px;
+    width: 48px;
+  }
+
+  .who_to_follow form {
+    display: inline-block;
+  }
 
 .follow {
   display: inline-block;
 }
 
-
-.sidebar_hashtags {
+.follow form div .btn {
+  width: 80px;
+  height: 25px;
+  line-height: initial;
 }
-
-.sidebar {
-  background-color: whitesmoke;
-  border-radius: 6px;
-  margin: 15px 0 0 0;
-  padding: 10px;
-  min-width: 290px;
-}
-
 
 .sidebar_footer {
-  padding: 10px;
-  margin: 15px 0 15px 0;
+  color: #B6BBBA
 }
 
 
 /*MAIN CONTENT RIGHT SIDEBAR*/
 
 .home_main_content {
-  padding: 0 0 0 20px;
-}
-
-.right_sidebar {
-  background-color: whitesmoke;
-  padding: 10px 0;
-  border-radius: 6px;
+  width: 590px;
   display: inline-block;
-  min-width: 635px;
-}
-
-.right_sidebar h2 {
-  padding: 0 0 10px 15px;
-}
-
-div.each_tweet.span12 {
-  max-height: 150px;
-  border-top: 1px solid gray;
-  padding: 10px 0 10px 0;
-  margin: 0;
-}
-
-.tweet_user_photo {
-  height: 50px;
-  width: 50px;
-  display: inline-block;
+  margin-left: 7px;
   vertical-align: top;
-  margin: 0 0 0 10px;
-  background-size: contain;
-  background-repeat: no-repeat;
+  background-color: whitesmoke;
+  border-radius: 6px;
+  padding: 0 12px;
+  margin-bottom: 30px;
 }
 
-.each_tweet div.tweet_info{
-  display: inline-block;
-  font-size:16px;
-  width: 80%;
-  margin: 0 0 0 10px;
-}
+/*TWEETS*/
 
-.tweet_content {
-  max-height: 70px;
-  word-wrap:break-word;
-  overflow: hidden
+.each_tweet {
+  max-height: 90px;
+  padding: 9px 12px 0 12px;
+  margin: 0;
+  border-bottom: 1px solid #eee;
+  overflow: hidden;
 }
+  .each_tweet .user_photo {
+    height: 50px;
+    width: 50px;
+    display: inline-block;
+    vertical-align: top;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  .each_tweet .tweet_info{
+    display: inline-block;
+    width: 80%;
+    margin: 0 0 0 5px;
+  }
+    .each_tweet .tweet_info p {
+      margin: 0;
+    }
+  .each_tweet .tweet_actions {
+    text-align: right;
+  }
+
+  .tweet_content {
+    max-height: 70px;
+    word-wrap:break-word;
+    text-overflow: ellipsis
+  }
 
 .username {
   font-weight: bold;
 }
 
-.user_info {
-  display: inline-block;
-}
-
-
-.home_tweet_actions {
-  float:right;
- /* padding: 15px 10px 0 0px;*/
- padding: 15px 10px 0 10px;
-}
-
-.home_tweet_actions form {
-  display: inline-block;
-  margin: 0 7px 0 0;
-}
-
-
+  .username + a::after {
+    content: "\00b7";
+  }
 
 .left_sidebar {
   display: inline-block;
@@ -243,6 +201,6 @@ div.each_tweet.span12 {
 
 
 /*HASHTAGS*/
-.each_hashtag {
+/*.each_hashtag {
   margin: 5px;
-}
+}*//*/

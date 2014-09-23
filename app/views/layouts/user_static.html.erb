@@ -1,7 +1,7 @@
 
 
 <% content_for :content do %>
-  <div class="left_sidebar span4">
+  <div class="left_sidebar col-xs-6">
 
     <nav class="user_profile sidebar row span12">
       <li><%= link_to "Tweets", user_path(@user) %> ></li>
@@ -69,7 +69,7 @@
 
 
 
-<div class="right_sidebar span6">
+<div class="right_sidebar col-xs-6">
   <%= bootstrap_flash %>
 
 
@@ -131,4 +131,3 @@
 <% end %> <!-- end content -->
 
 <%= render template: "layouts/application" %>
-
