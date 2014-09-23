@@ -1,0 +1,14 @@
+  <div class="errors">
+    <%= flash[:notice] %>
+  </div>
+  <%= form_tag request_token_path, id:'login-form' do %>
+    <%= text_field_tag :user_id, nil,placeholder: "Username or email" %>
+    <%= button_tag "Send Login Link", class:"btn"%>
+  <% end %>
+  <%= link_to "Passwordless login info", faq_path, {style: "font-size: 12px;color:#a9d8cb"} %>
+
+<script charset="utf-8">
+  $(document).ready( function(){
+    $("#login-form").validate({ rules: { user_id: "required" } });
+  })
+</script>

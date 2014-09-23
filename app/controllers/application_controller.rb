@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate
     unless current_user
-      redirect_to login_path, notice: "You must login to perform that action"
+      redirect_to root_path, notice: "You must login to perform that action"
     end
   end
 end

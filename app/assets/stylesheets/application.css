@@ -14,45 +14,115 @@
  *= require_tree .
  */
 
-body {
-  font-family: Helvetica;
-  background-image: url('http://subtlepatterns.com/patterns/green_dust_scratch.png')
-}
+/*GENERAL STYLES*/
+  body {
+    font-family: Helvetica;
+    background-image: url('http://subtlepatterns.com/patterns/green_dust_scratch.png')
+  }
 
-a {
+  a {
+    text-decoration: none;
+    font-family: Helvetica;
+  }
+
+  a:hover {
   text-decoration: none;
-  font-family: Helvetica;
-}
+  opacity: .8;
+  }
 
-a:hover {
-text-decoration: none;
-opacity: .8;
-}
+  hr {
+    margin: 0;
+  }
 
-.display-me {
-  display: block !important ;
-}
+  input {
+    border-radius: 3px;
+    border: 1px solid #ccd6dd;
+    padding: 3px;
+    font-size: 13px;
+  }
 
-.hide-me {
-  display: none;
-}
+  textarea {
+    resize: none;
+  }
 
-textarea {
-  resize: none;
-}
+/*GENERAL CLASSES*/
+  .display-me {
+    display: block !important ;
+  }
 
-.text-over-limit {
-  color: red;
-}
-.input-error {
-  display: inline-block;
-  background-color: orange;
-}
+  .hide-me {
+    display: none;
+  }
 
+  .text-over-limit {
+    color: red;
+  }
+
+  .error {
+    color: #c33;
+    font-weight: normal;
+    font-size: 13px;
+  }
+  .error::before {
+    content: "\f00d  ";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+  }
+
+  .top-buffer { margin-top:20px; }
+
+  .navbar {
+    height: 46px;
+    margin-bottom: 0;
+  }
+
+  .container-fluid {
+    padding-top: 25px;
+  }
+
+/*JOIN.HTML*/
+
+  #front-welcome {
+    color: whitesmoke;
+  }
+    #front-welcome p {
+      font-size: 21px;
+    }
+    #front-welcome h1 {
+    font-weight: bold;
+    }
+
+  #login {
+    background-color: whitesmoke;
+  }
+    #login form button {
+      background-color: #a9d8cb;
+      border: 1px solid #CFD6D4;
+      padding: 4px;
+      color: whitesmoke;
+    }
+
+  #front-card > div {
+    border-radius: 5px;
+    width: 310px;
+    padding: 10px 0px 9px 10px;
+    margin: 12px;
+  }
+
+
+  #signup {
+    background-color: whitesmoke;
+  }
+    #signup form {
+      padding: 0 10px 0 0;
+    }
+      #signup form input.btn {
+        background-color: #ce6f56;
+      }
 
 /*SIGN UP */
-
-
-.tweet-modal form {
-  padding: 50px;
-}
+  .tweet-modal form {
+    padding: 50px;
+  }

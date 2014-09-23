@@ -39,7 +39,7 @@
 
   </head>
   <body>
-    <%= nav_bar :fixed => :top, :brand => image_tag('kitter.png', class: 'nav_icon'), :responsive => false do %>
+    <%= nav_bar :brand => image_tag('kitter.png', class: 'nav_icon'), :responsive => false do %>
       <%= menu_group :pull => :right do %>
         <% if current_user %>
             <%= menu_item image_tag('notification.png', class: 'nav_icon')+"Notifications", user_notifications_path(current_user)%>
@@ -48,34 +48,32 @@
             <%= menu_item image_tag('settings.png', class: 'nav_icon'), edit_user_path(current_user)%></li>
             <li class="right" data-toggle="modal" data-target="#newTweetModal"><%= image_tag('write.png', class: 'nav_icon') %>
             <%= menu_item "Logout", logout_path %></li>
-        <% else %>
-          <%= drop_down "Have an account? Sign in <i class='fa fa-caret-down'></i>".html_safe do %>
-            <%= render 'sessions/_new' %>
+        <!-- hide sign in drop down if on main page -->
+        <% elsif params[:action] != "join" %>
+          <%= drop_down "Have an account? Sign in" do %>
+            <%= render 'sessions/login' %>
           <% end %>
         <% end %>
       <% end %>
     <% end %>
-
-
     <div class="container-fluid">
       <div class="row-fluid">
-      <% if current_user %>
-        <div class="modal fade" id="newTweetModal" tabindex="-1" role="dialog" aria-labeledby="newTweetModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content tweet-modal">
-              <%= flash[:notice] %>
+        <% if current_user %>
+          <div class="modal fade" id="newTweetModal" tabindex="-1" role="dialog" aria-labeledby="newTweetModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content tweet-modal">
+                <%= flash[:notice] %>
 
-              <%= form_for [current_user,Tweet.new] do |f| %>
-              <%= f.text_field :content, placeholder: 'limit 140 characters', maxlength: 140  %>
-              <%= f.submit "Meow!" %>
-              <% end %>
+                <%= form_for [current_user,Tweet.new] do |f| %>
+                <%= f.text_field :content, placeholder: 'limit 140 characters', maxlength: 140  %>
+                <%= f.submit "Meow!" %>
+                <% end %>
+              </div>
             </div>
           </div>
-        </div>
-      <% end %>
-
-    <%= content_for?(:content) ? yield(:content) : yield %>
-
+        <% end %>
+          <%= flash[:notice] %>
+          <%= content_for?(:content) ? yield(:content) : yield %>
       </div><!--/row-->
     </div> <!-- /container -->
   </body>
