@@ -39,7 +39,7 @@ end
 # gem 'debugger', group: [:development, :test]
 
 gem 'chosen-rails'
-gem 'twitter-bootstrap-rails'
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem "haml"
 gem 'embedly'
 gem 'dotenv-rails'

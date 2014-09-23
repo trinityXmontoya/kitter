@@ -1,7 +1,8 @@
 Kitter::Application.routes.draw do
 
   # HOME PAGE
-  root 'main#welcome'
+  root 'main#join'
+  get '/#' => 'main#welcome'
 
   # FAQ
   get '/faq' => 'main#faq'
@@ -11,7 +12,6 @@ Kitter::Application.routes.draw do
 
   # SESSIONS & SIGNUP
   get '/validate_input/*type' => 'sessions#validate_input'
-  get '/login' => 'sessions#new'
   post '/login/request_token' => 'sessions#request_token', as: :request_token
   get '/login/:user_id/*auth_token' => 'sessions#create'
   get '/logout' => 'sessions#destroy'

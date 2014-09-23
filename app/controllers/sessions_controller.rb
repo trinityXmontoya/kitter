@@ -27,9 +27,9 @@ class SessionsController < ApplicationController
     end
     if @user
       @user.send_login_link
-      redirect_to login_path, notice: "#{@user.username.capitalize} your email was sent!"
+      redirect_to root_path, notice: "#{@user.username.capitalize} your email was sent!"
     else
-      redirect_to login_path, notice: "Whoops! Looks like #{lookup} is not registered on this site. Please check spelling or signup!"
+      redirect_to root_path, notice: "Whoops! Looks like #{lookup} is not registered on this site. Please check spelling or signup!"
     end
   end
 
@@ -39,7 +39,7 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.username
       redirect_to root_path, notice: "Welcome " + @user.username
     else
-      redirect_to login_path, notice: "Error logging in.\nPerhaps your login link expired!\nYou can resend yourself one below."
+      redirect_to root_path, notice: "Error logging in.\nPerhaps your login link expired!\nYou can resend yourself one below."
     end
   end
 

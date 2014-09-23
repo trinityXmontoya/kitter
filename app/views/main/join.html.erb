@@ -1,0 +1,16 @@
+<%= javascript_include_tag 'welcome/bg_change' %>
+
+<div id="front-welcome" class="col-xs-9 col-md-4 col-lg-5 col-sm-5 col-md-offset-1 col-sm-offset-0  col-xs-offset-1">
+  <h1>Welcome to Kitter.</h1>
+  <p>Connect with your cat — and other people's. Get in-the-moment updates on the things that interest them. And watch them meow, in real time, from every angle.</p>
+</div>
+<div class="top-buffer col-xs-9 col-sm-4 col-md-4 col-lg-4  col-sm-offset-1 col-md-offset-1 col-xs-offset-1" id="front-card">
+    <div id="login">
+      <%= render 'sessions/login' %>
+    </div>
+    <div id="signup">
+      <h4 style="display:inline-block"><strong>New to Kitter?</strong></h4> <span style="font-size:16px">Sign up</span>
+      <hr>
+      <%= render 'users/signup', user: User.new %>
+    </div>
+</div>

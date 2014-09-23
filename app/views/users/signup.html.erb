@@ -22,22 +22,5 @@
   Read more about our <%= link_to "passwordless login process here.", faq_path %>
   <br>
   <br>
-  <%= form_for @user do |f|%>
-    <div class="form-group input-group">
-    <%= f.label :email, "Email address" %>
-    <%= f.text_field :email, type: 'email', class: 'form-control'%>
-    </div>
-
-    <div class="form-group input-group">
-    <%= f.label :name, "Full name" %>
-    <%= f.text_field :name, type: 'text', class: 'form-control'%>
-    </div>
-
-    <div class="form-group input-group">
-    <%= f.label :username, "Choose your username" %>
-    <%= f.text_field :username, type: 'text', class: 'form-control'%>
-    </div>
-
-    <%= f.submit "Create my account",class: 'btn' %>
-  <% end %>
+  <%= render 'users/signup', user: @user %>
 </div><!-- end signup form-->

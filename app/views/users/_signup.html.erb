@@ -1,0 +1,19 @@
+<%= javascript_include_tag "users/signup" %>
+
+<%= form_for user do |f|%>
+  <div class="form-group">
+  <%= f.label :email, "Email address" %>
+  <%= f.text_field :email, type: 'email', class: 'form-control'%>
+  </div>
+
+  <div class="form-group">
+  <%= f.label :name, "Full name" %>
+  <%= f.text_field :name, type: 'text', class: 'form-control'%>
+  </div>
+
+  <div class="form-group">
+  <%= f.label :username, "Choose your username" %>
+  <%= f.text_field :username, type: 'text', class: 'form-control alphaNumeric'%>
+  </div>
+  <%= f.submit "Sign up for Kitter",class: 'btn' %>
+<% end %>
