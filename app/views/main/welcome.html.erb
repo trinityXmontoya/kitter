@@ -90,10 +90,12 @@
 
   <div class="right_sidebar span9">
     <h2>Tweets</h2>
+    <% if @tweets %>
       <% @tweets.each do |tweet| %>
         <% cache tweet do %>
           <%= render 'tweets/individual_tweet_template', tweet: tweet %>
         <% end %>
       <% end %>
+    <% end %>
   </div><!-- .right_sidebar -->
 </div><!-- span6 -->
