@@ -2,7 +2,7 @@ Kitter::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # add page specific js
-  config.assets.precompile += [ "welcome/bg_change.js", "users/signup.js", "users/edit.js"]
+  config.assets.precompile += [ "body_bg_change.css", "users/signup.js", "users/edit.js"]
 
   # Code is not reloaded between requests.
   config.cache_classes = true
