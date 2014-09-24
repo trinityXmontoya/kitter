@@ -1,18 +1,7 @@
-<div style="min-width:1200px;">
-  <div class="left_sidebar">
+<% content_for :left_sidebar do %>
+  <% content_for :left_sidebar_top do %>
     <div class="home_user_info">
-        <!-- user info-->
-        <%= link_to @user do %>
-          <div class="bg_photo" style="background-image:url('<%=@user.background_photo_url%>')">
-          </div>
-          <div>
-            <img src="<%= @user.profile_photo_url%>" alt="<%= @user.username%>'s photo"/>
-            <p>
-              <strong><%= @user.name.capitalize %></strong>
-              <br><%= "@#{@user.username}" %>
-            </p>
-          </div>
-        <% end %>
+        <%= render 'users/main_info', user: @user %>
         <!-- user stats -->
         <%= link_to @user do %>
           <div id="home_sidebar_user_stats" class="home_div">
@@ -36,7 +25,7 @@
         <%= form_for @path do |f| %>
         <!-- you cannot pass the contents of a contenteditable input to the server, and this div needs to be contenteditable for the 140 char limit count -->
         <%= f.hidden_field :content %>
-        <div id='tweet-content-text' contenteditable='true' role='text'></div>
+        <div id='tweet-content-text' contenteditable='true' role='text'>Meow meow meow...</div>
         <div id="tweet_form_options" class='hide-me'>
           <p id="charCount">140</p>
           <%= f.submit "Meow!", id: 'tweet-submit', class: 'btn' %>
@@ -44,55 +33,22 @@
         </div>
       </div>
     </div><!--/.home_user_info -->
+  <% end %>
+  <%= render 'shared/main_left_sidebar' %>
+<% end %>
 
-    <div class="who_to_follow sidebar">
-      <p>Who to Follow | <span class="num_link"><%=link_to "View All", users_path%></span></p>
-      <br>
-      <% @users.each do |user|  %>
-        <% unless current_user == user %>
-          <div class="who_to_follow_info">
-            <img src="<%=user.profile_photo_url%>" alt="<%= user.username %>'s  profile photo" />
-            <div class="follow">
-              <p><%= user.name %> <%= link_to "@#{user.username}", user_path(user)  %></p>
-              <br>
-                <%= button_to "Follow", user_follow_path(user) , class: 'btn'%>
-            </div><!--.follow -->
-          </div><!--.who_to_follow_info -->
-          <br>
+<!-- YIELD -->
+<h3>Tweets</h3>
+<hr>
+  <% if @tweets %>
+    <% @tweets.each do |tweet| %>
+      <% cache tweet do %>
+        <% if tweet.retweets.first %>
+          <p class="retweet_notice">
+            <i class="fa fa-retweet"></i> <%= tweet.retweets.first.user.username %> retweeted
+          </p>
         <% end %>
+        <%= render 'tweets/individual_tweet_template', tweet: tweet %>
       <% end %>
-    </div><!--.who_to_follow sidebar -->
-
-    <div class="sidebar_hashtags sidebar">
-      <h4>Trends</h4>
-      <% @hashtags.each do |h| %>
-        <%= link_to "##{h.content}", hashtag_path(h) %>
-        <br>
-      <% end %>
-    </div>
-
-    <div class="sidebar_footer sidebar">
-      &copy; Kitter 2014
-       <a href="http://www.trinitymontoya.com">by Trinity Montoya</a>
-    </div>
-
-  </div><!--/left_sidebar-->
-
-  <div class="home_main_content">
-  <%= bootstrap_flash %>
-      <h3>Tweets</h3>
-      <hr>
-        <% if @tweets %>
-          <% @tweets.each do |tweet| %>
-            <% cache tweet do %>
-              <% if tweet.retweets.first %>
-                <p class="retweet_notice">
-                  <i class="fa fa-retweet"></i> <%= tweet.retweets.first.user.username %> retweeted
-                </p>
-              <% end %>
-              <%= render 'tweets/individual_tweet_template', tweet: tweet %>
-            <% end %>
-          <% end %>
-        <% end %>
-  </div><!-- .home_main_content -->
-</div>
+    <% end %>
+<% end %>

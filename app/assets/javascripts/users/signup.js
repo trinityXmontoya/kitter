@@ -3,11 +3,7 @@ $(document).ready(function(){
  loadValidations();
 });
 
-function loadValidations(){
-  $.validator.addMethod("alphanumeric", function(val,el){
-    return this.optional(el) || /^[a-zA-Z0-9]+$/.test(val);
-  });
-
+var loadValidations = function(){
   $("#new_user").validate({
     debug: false,
     rules: {

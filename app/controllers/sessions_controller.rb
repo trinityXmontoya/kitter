@@ -4,6 +4,7 @@ class SessionsController < ApplicationController
   end
 
   def validate_input
+    puts "VALIDATING YR INPUT"
     if params[:type] == 'email'
       user = User.find_by_email(params[:user][:email])
     elsif params[:type] == 'username'
@@ -11,7 +12,7 @@ class SessionsController < ApplicationController
     end
     respond_to do |format|
       if current_user && current_user == user
-        format.json { render :json => !user }
+        format.json { render :json => true }
       else
         format.json { render :json => !user}
       end

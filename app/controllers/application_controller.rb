@@ -13,4 +13,11 @@ class ApplicationController < ActionController::Base
       redirect_to root_path, notice: "You must login to perform that action"
     end
   end
+
+  def two_column_layout
+    users = User.select(:profile_photo_url,:username, :name).reject {|user| current_user.followings.include?(user)}
+    @users=users.sample(3)
+    @hashtags=Hashtag.cached_top_ten
+    render :layout => 'two_column'
+  end
 end

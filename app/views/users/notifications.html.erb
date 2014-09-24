@@ -1,9 +1,21 @@
-<h1>Notifications</h1>
+<% content_for :left_sidebar do %>
+  <% content_for :left_sidebar_top do %>
+    <div class="sidebar left-sidebar-top">
+      <a><h5>Notifications <i class="fa fa-chevron-right"></i></h5></a>
+      <hr>
+      <a><h5>Mentions <i class="fa fa-chevron-right"></i></h5></a>
+    </div>
+  <% end %>
+  <%= render 'shared/main_left_sidebar' %>
+<% end %>
 
+<!-- YIELD -->
+<h1>Notifications</h1>
+<hr>
 <% @all_notifications.each do |notification| %>
   <% if notification.class == Notification %>
     <% if notification.kind == 'retweeted' || notification.kind == 'favorited' %>
-    <div class='row span 12'>
+    <div>
       <%= image_tag("#{notification.kind}.png", size: "20") %>
       <b><%= link_to notification.poster.name, notification.poster %></b>
       <%= notification.kind %> your tweet!

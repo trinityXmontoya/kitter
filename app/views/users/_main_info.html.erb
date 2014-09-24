@@ -1,0 +1,12 @@
+<!-- user info-->
+<%= link_to user do %>
+  <div class="bg_photo" style="background-image:url('<%=user.background_photo_url%>')">
+  </div>
+  <div>
+    <img src="<%= user.profile_photo_url%>" alt="<%= user.username%>'s photo"/>
+    <p>
+      <strong><%= user.name.capitalize %></strong>
+      <br><%= "@#{user.username}" %>
+    </p>
+  </div>
+<% end %>
