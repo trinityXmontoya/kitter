@@ -13,7 +13,7 @@ class Tweet < ActiveRecord::Base
   validates :content, :user_id, :num_of_favs, :num_of_retweets, presence: true
 
   before_create :scan_tweet
-  before_destroy :update_hashtag_count
+  before_destroy :update_hashtag_count, :delete_reply
 
   def update_hashtag_count
     if contains_hashtag
@@ -38,11 +38,14 @@ class Tweet < ActiveRecord::Base
   end
 
   def find_links(string)
-    string.split.each_with_index do |word,i|
+    string.split.each do |word|
       if uri?(word)
-        string << embed_media(word)
-        short_url = shorten_url(word)
-        string.sub!(word, "<a href='#{short_url}'>#{short_url}</a>")
+        media = embed_media(word)
+        if media
+          string << media
+          short_url = shorten_url(word)
+          string.sub!(word, "<a href='#{short_url}'>#{short_url}</a>")
+        end
       end
     end
     return string
@@ -61,22 +64,27 @@ class Tweet < ActiveRecord::Base
   def embed_media(url)
     embedly_api = Embedly::API.new :key => '1417d995b5a74c61b647102980df6107'
     obj = (embedly_api.oembed :url => url)[0]
-    puts obj
-    if obj[:type]=='video'
-      return obj[:html]
-    elsif obj[:type]=='photo'
-      return " <img class='tweet-display-photo' src='#{shorten_url(url)}'>"
+    type = obj[:type]
+    if type == 'error'
+      return nil
     else
-      if obj[:title]
-        return " <a href='#{shorten_url(url)}'>#{obj[:title]}</a>"
+      if type == 'video'
+        has_media = true
+        return obj[:html]
+      elsif type == 'photo'
+        has_media = true
+        return "<img class='tweet-display-photo' src='#{shorten_url(url)}'>"
+      else
+        if obj[:title]
+          return " <a href='#{shorten_url(url)}'>#{obj[:title]}</a>"
+        end
       end
-
     end
   end
 
   def shorten_url(url)
-    new_link = ShortLink.find_or_create_by(orig_url: url)
-    return 'http://localhost:3000' + '/s/' + new_link.short_url_path
+    link = ShortLink.find_or_create_by(orig_url: url)
+    return 'http://localhost:3000' + '/s/' + link.short_url_path
   end
 
   def generate_short_url
@@ -122,6 +130,12 @@ class Tweet < ActiveRecord::Base
 
   def is_a_reply
     Reply.where(reply_tweet_id: id).exists?
+  end
+
+  def delete_reply
+    if self.is_a_reply
+      Reply.where(reply_tweet_id: id).destroy_all
+    end
   end
 
   def original_tweet_replied_to
