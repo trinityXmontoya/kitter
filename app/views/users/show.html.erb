@@ -1,8 +1,106 @@
+<style>
+  .user-bg-img {
+    width: 100%;
+    position: absolute;
+    padding: 0;
+    margin: -25px 0 0 -15px;
+    height: 280px;
+    z-index: -1;
+  }
 
-<%= @user.username %>'s Tweets
+  .main-user {
+    margin-top: 125px;
+  }
+    .main-user > img {
+      width: 200px;
+      height: 200px;
+      border: solid 4px whitesmoke;
+      border-radius: 6px;
+      background-color: whitesmoke;
+      position: relative;
+      z-index: 2;
+    }
 
-<% @tweets.each do |tweet| %>
-  <% cache tweet do %>
-    <%= render 'tweets/individual_tweet_template', tweet: tweet %>
+  .navbar-static-top {
+    margin: 250px 0 0 -15px;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+  }
+
+  .user-profile-tweets {
+    margin: 320px 0 0 0;
+  }
+
+  .user-prof-username {
+    margin: -15px 0 0 0;
+    color:rgb(157, 164, 160)
+  }
+</style>
+
+  <div class="user-bg-img" style="background-image:url(<%= @user.background_photo_url%>)">
+  </div>
+
+  <%= nav_bar static: 'top', class: 'user-prof-nav' do %>
+    <%= menu_group pull: :right do %>
+      <%= menu_text "Tweets(#{@user.tweets.size})", data:'user-tweets' %>
+      <%= menu_text "Photos/Videos(#{@user.tweets.size})", data:'user-photos' %>
+      <%= menu_text "Following(#{@user.followings.size})", data:'user-followings' %>
+      <%= menu_text "Followers(#{@user.followers.size})", data:'user-followers' %>
+      <%= menu_text "Favorites(#{@user.favorites.size})", data:'user-favorites' %>
+      <%= menu_item "Edit Profile", edit_user_path(@user), class: 'btn' %>
+    <% end %>
   <% end %>
-<% end %>
+
+  <script>
+  $(document).ready( function(){
+    $('.navbar-text').on('click',loadDiv)
+  });
+
+  var loadDiv = function(){
+    var id = this.getAttribute('data')
+    console.log(id)
+    $('.display-me').removeClass('display-me').addClass('hide-me');
+    $('#'+id+'').addClass('display-me');
+  }
+  </script>
+
+  <div style="min-width:1200px;">
+    <div class="left_sidebar">
+      <div class="main-user">
+        <%= image_tag @user.profile_photo_url %>
+        <p><h3><strong><%= @user.name.capitalize %></strong></h3></p>
+        <p class="user-prof-username"><%= link_to "@"+@user.username, @user %></p>
+        <p><%= @user.bio %></p>
+        <div>
+          <i class="fa fa-anchor"></i> <%= @user.location %>
+          <br>
+          <i class="fa fa-link"></i> <%= link_to @user.website %>
+          <br>
+          <i class="fa fa-clock-o"></i> Joined <%= @user.created_at.strftime('%B %Y') %>
+        </div>
+      </div>
+      <br>
+      <% unless current_user == @user %>
+        <div class="sidebar">
+          1 follower u know
+        </div>
+      <% end %>
+      <div class="photos_and_videos sidebar">
+        <h3>Photos and Videos</h3>
+      </div>
+      <%= render 'shared/main_left_sidebar' %>
+      &copy; Kitter 2014
+       <a href="http://www.trinitymontoya.com">by Trinity Montoya</a>
+    </div><!--/left_sidebar-->
+
+    <div class="main_content user-profile-tweets">
+      <%= bootstrap_flash %>
+      <div class="user-prof display-me" id="user-tweets"><%= render 'tweets/index', tweets: @tweets %></div>
+      <div class="user-prof hide-me" id="user-favorites"><%= render 'users/favorites', favorites: @favorites %></div>
+      <div class="user-prof hide-me" id="user-followers"><%= render 'users/followers', followers: @followers %></div>
+      <div class="user-prof hide-me" id="user-followings"><%= render 'users/followings', followings: @followings %></div>
+      <div class="user-prof hide-me" id="user-photos"><%= render 'users/followings'%></div>
+
+    </div><!-- .main_content -->
+  </div>
