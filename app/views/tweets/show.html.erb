@@ -1,18 +1,41 @@
-<% cache @tweet do %>
-  <%= render 'tweets/individual_tweet_template', tweet: @tweet %>
-<% end %>
+<div id="main-tweet">
+  <div class="main-tweet-display">
+    <% cache @tweet do %>
+      <%= render 'tweets/individual_tweet_template', tweet: @tweet %>
+    <% end %>
 
-Favorites:<%= @tweet.num_of_favs %>
-Retweets: <%= @tweet.num_of_retweets %>
-<%= @tweet.created_at.strftime("%D") %>
+    Favorites:<%= @tweet.num_of_favs %>
+    Retweets: <%= @tweet.num_of_retweets %>
+    <%= @tweet.created_at.strftime("%D") %>
 
-<%= form_tag tweet_reply_path(@tweet) do %>
-  <%= text_field_tag :content %>
-  <%= submit_tag "Meow back" %>
-<% end %>
+  </div>
 
-<% @replies.each do |reply| %>
-  <% cache reply do %>
-    <%= render 'tweets/individual_tweet_template', tweet: reply.reply_tweet %>
+  <%= form_tag tweet_reply_path(@tweet) do %>
+    <%= text_field_tag :content %>
+    <%= submit_tag "Meow back" %>
   <% end %>
-<% end %>
+
+  <% @replies.each do |reply| %>
+    <% cache reply do %>
+      <%= render 'tweets/individual_tweet_template', tweet: reply.reply_tweet %>
+    <% end %>
+  <% end %>
+</div>
+
+<style>
+  #main-tweet {
+    width: 640px;
+    margin: 0 auto;
+    background-color: whitesmoke;
+    border-radius: 6px;
+    padding: 10px;
+    border: solid 1px #ccd6dd;
+  }
+  .main-tweet-display > .each_tweet {
+    max-height: 130px
+  }
+  .main-tweet-display .tweet_content {
+    font-size: 28px;
+    font-weight: normal;
+  }
+</style>
