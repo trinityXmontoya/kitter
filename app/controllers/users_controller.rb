@@ -30,12 +30,16 @@ class UsersController < ApplicationController
 
   def edit
     @user=User.cached_find(params[:id])
+    two_column_layout
   end
 
   def update
     @user=User.cached_find(params[:id])
-    @user.update(user_params)
-    redirect_to @user
+    if @user.update(user_params)
+      redirect_to @user
+    else
+      redirect_to edit_user_path(@user)
+    end
   end
 
   def destroy
@@ -50,6 +54,7 @@ class UsersController < ApplicationController
     notifications=@user.notifications
     replies = @user.tweet_replies
     @all_notifications = (notifications + replies)
+    two_column_layout
     # puts "REPLIES"
     # puts replies
     # puts "NOTIFICATIONS"
@@ -110,7 +115,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:username, :name, :email, :bio, :website, :verified, :location, :country_id,:profile_photo_url, :background_photo_url)
+    params.require(:user).permit(:username, :name, :email, :bio, :website, :location, :profile_photo_url, :background_photo_url)
   end
 
   def init_const_vars
