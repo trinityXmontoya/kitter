@@ -44,7 +44,7 @@ class Tweet < ActiveRecord::Base
         if media
           string << media
           short_url = shorten_url(word)
-          string.sub!(word, "<a href='#{short_url}'>#{short_url.slice! "http://www."}</a>")
+          string.sub!(word, "<a href='#{short_url}'>#{short_url.sub "https://www.",""}</a>")
         end
       end
     end
