@@ -84,7 +84,7 @@ class Tweet < ActiveRecord::Base
 
   def shorten_url(url)
     link = ShortLink.find_or_create_by(orig_url: url)
-    return 'http://localhost:3000' + '/s/' + link.short_url_path
+    return 'www.kitter.cat/s/' + link.short_url_path
   end
 
   def generate_short_url
