@@ -36,7 +36,7 @@
         <%= form_for @path do |f| %>
         <!-- you cannot pass the contents of a contenteditable input to the server, and this div needs to be contenteditable for the 140 char limit count -->
         <%= f.hidden_field :content %>
-        <div id='tweet-content-text' contenteditable='true' role='text'></div>
+        <div id='tweet-content-text' contenteditable='true' role='text'>Meow meow meow...</div>
         <div id="tweet_form_options" class='hide-me'>
           <p id="charCount">140</p>
           <%= f.submit "Meow!", id: 'tweet-submit', class: 'btn' %>

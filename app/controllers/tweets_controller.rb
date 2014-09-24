@@ -61,10 +61,10 @@ class TweetsController < ApplicationController
   end
 
   def destroy
-    @tweet=Tweet.find(params[:id])
-    @user=@tweet.user
+    @tweet = Tweet.find(params[:id])
+    user = @tweet.user
     @tweet.destroy
-    redirect_to @user
+    redirect_to user
   end
 
   private

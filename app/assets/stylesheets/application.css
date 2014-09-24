@@ -48,6 +48,8 @@
     resize: none;
   }
 
+  [contenteditable]:focus { outline: 0px solid transparent; }
+
 /*GENERAL CLASSES*/
   .display-me {
     display: block !important ;

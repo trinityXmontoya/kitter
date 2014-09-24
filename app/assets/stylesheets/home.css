@@ -82,7 +82,7 @@ img.nav_icon{
   #tweet_box {
     background-color: rgb(188,235,222);
     height: 70px;
-    padding: 5px 5px 10px 5px;
+    padding: 5px;
     border-radius: 0 0 6px 6px;
   }
 
@@ -90,13 +90,16 @@ img.nav_icon{
    text-align: center;
     padding: 8px;
     width: 100%;
-   /* margin: 3px 25px;*/
   }
 
   input[value="Meow!"] {
-  margin: 2px 28px;
-  text-align: center;
-  float: right;
+    float: right;
+    margin: 0 10px 0 0;
+  }
+
+  p#charCount {
+    display: inline-block;
+    margin: 9px 0 0 170px;
   }
 
 /*WHO TO FOLLOW*/

@@ -1,29 +1,37 @@
 $(document).ready(function(){
-  $('#tweet-content-text').on("focusin",displayFullForm);
-  $('#tweet-content-text').on("focusout",displayFullForm);
-  $('#tweet-content-text').bind('keyup',tweetCharCount);
-  $('#tweet-content-text').bind('keyup',setContent);
+  var tweetText = $('#tweet-content-text') ;
+  tweetText.on("focusin",displayFullForm);
+  tweetText.on("focusout",displayFullForm);
+  tweetText.bind('keyup',tweetCharCount);
+  tweetText.bind('keyup',setContent);
 });
 
-function setContent(){
+var setContent = function(){
   tweet_content = $('#tweet-content-text').text()
   $('input:hidden[id=tweet_content]').val(tweet_content)
 }
 
-function displayFullForm(){
-  console.log('focused')
+var displayFullForm = function(){
+  if ($(this).text() == 'Meow meow meow...'){
+    $(this).empty();
+  }
   if ($(this).text().length == 0)
     {
+      if( $(this).is(":active") ){
+        $('#tweet_box').css('height','235px');
+      }
+      else { $('#tweet_box').css('height','70px'); }
       $(this).toggleClass('enlarge-form-input');
       $('#tweet_form_options').toggleClass('display-me');
     }
   else if ($(this).is(":focus")) {
     $(this).css('color','black');
   }
-  else { $(this).css('color','gray') }
+  else { $(this).css('color','gray')
+        }
 }
 
-function tweetCharCount(){
+var tweetCharCount = function(){
   content = $(this).text();
   chars = $('#charCount');
   lim = 140;
@@ -44,7 +52,7 @@ function tweetCharCount(){
   }
 }
 
-function setEndOfContenteditable(elem){
+var setEndOfContenteditable = function(elem){
   var range,selection;
     if(document.createRange)//Firefox, Chrome, Opera, Safari, IE 9+
     {
