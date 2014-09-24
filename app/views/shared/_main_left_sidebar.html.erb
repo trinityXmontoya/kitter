@@ -1,0 +1,27 @@
+<%= yield :left_sidebar_top %>
+
+<div class="who_to_follow sidebar">
+  <p>Who to Follow | <span class="num_link"><%=link_to "View All", users_path%></span></p>
+  <br>
+  <% @users.each do |user|  %>
+    <% unless current_user == user %>
+      <div class="who_to_follow_info">
+        <img src="<%=user.profile_photo_url%>" alt="<%= user.username %>'s  profile photo" />
+        <div class="follow">
+          <p><%= user.name %> <%= link_to "@#{user.username}", user_path(user)  %></p>
+          <br>
+            <%= button_to "Follow", user_follow_path(user) , class: 'btn'%>
+        </div><!--.follow -->
+      </div><!--.who_to_follow_info -->
+      <br>
+    <% end %>
+  <% end %>
+</div><!--.who_to_follow sidebar -->
+
+<div class="sidebar_hashtags sidebar">
+  <h4>Trends</h4>
+  <% @hashtags.each do |h| %>
+    <%= link_to "##{h.content}", hashtag_path(h) %>
+    <br>
+  <% end %>
+</div>

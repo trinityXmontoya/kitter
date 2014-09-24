@@ -2,6 +2,11 @@ class TweetsController < ApplicationController
 
   before_action :authenticate, only:[:new,:create,:edit,:update,:destroy]
 
+  def discover
+    @tweets = Tweet.order(created_at: :desc).limit(30)
+    two_column_layout
+  end
+  
   def show
     @tweet=Tweet.find(params[:id])
     @replies = @tweet.replies.includes(:reply_tweet)
