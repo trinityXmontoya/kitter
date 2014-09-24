@@ -25,7 +25,7 @@ Kitter::Application.routes.draw do
     post '/unfollow' => 'users#unfollow'
     post '/block' => 'users#block'
     post '/unblock' => 'users#unblock'
-    resources :tweets, except:[:index], shallow: true do
+    resources :tweets, except:[:index, :new, :edit, :update], shallow: true do
        post '/favorite' => 'tweets#favorite'
        post '/unfavorite' => 'tweets#unfavorite'
        post '/retweet' => 'tweets#retweet'

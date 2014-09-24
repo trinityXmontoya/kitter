@@ -6,16 +6,10 @@ class TweetsController < ApplicationController
     @tweets = Tweet.order(created_at: :desc).limit(30)
     two_column_layout
   end
-  
+
   def show
     @tweet=Tweet.find(params[:id])
     @replies = @tweet.replies.includes(:reply_tweet)
-  end
-
-  def new
-    @user=User.cached_find(params[:user_id])
-    @tweet=Tweet.new
-    @path=[@user,@tweet]
   end
 
   def create
