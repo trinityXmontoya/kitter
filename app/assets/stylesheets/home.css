@@ -153,6 +153,19 @@ img.nav_icon{
 
 /*TWEETS*/
 
+.retweet_notice {
+  margin: 0 0 0 24px;
+  color: #CB9283;
+  font-size: 13px;
+}
+  .retweet_notice i {
+    background-color: rgb(188,235,222);
+    border-radius: 5px;
+    padding: 2px;
+    font-size: 13px;
+    color: whitesmoke;
+  }
+
 .each_tweet {
   max-height: 90px;
   padding: 9px 12px 0 12px;
@@ -160,7 +173,7 @@ img.nav_icon{
   border-bottom: 1px solid #eee;
   overflow: hidden;
 }
-  .each_tweet .user_photo {
+  .user_photo {
     height: 50px;
     width: 50px;
     display: inline-block;
@@ -168,22 +181,32 @@ img.nav_icon{
     background-size: contain;
     background-repeat: no-repeat;
   }
-  .each_tweet .tweet_info{
+  .tweet_info{
     display: inline-block;
-    width: 80%;
+    width: 87%;
     margin: 0 0 0 5px;
+    max-height: 50px;
   }
-    .each_tweet .tweet_info p {
+    .tweet_info p {
       margin: 0;
     }
-  .each_tweet .tweet_actions {
+  .tweet_actions {
     text-align: right;
   }
+    .tweet_actions li a {
+      color: #CDC0BD;
+      font-size: 11px;
+    }
+    .tweet_actions li, .tweet_actions li.view a {
+      color: #CB9283;
+      font-size: 11px;
+      display: inline-block;
+    }
 
   .tweet_content {
-    max-height: 70px;
-    word-wrap:break-word;
-    text-overflow: ellipsis
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
 .username {
@@ -194,13 +217,21 @@ img.nav_icon{
     content: "\00b7";
   }
 
-.left_sidebar {
-  display: inline-block;
-  width: 300px;
+.tweet-display-photo, .embedly-embed {
+  display: none;
 }
 
+.expanded-tweet {
+  max-height: 300px !important;
+}
 
-/*HASHTAGS*/
-/*.each_hashtag {
-  margin: 5px;
-}*//*/
+  .expanded-tweet img, .expanded-tweet iframe {
+    display: block;
+    max-width: 80%;
+    max-height: 200px;
+  }
+
+.list-inline>li.collapse {
+  display: inline-block;
+  display: none;
+}
