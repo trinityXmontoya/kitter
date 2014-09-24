@@ -16,6 +16,8 @@ Kitter::Application.routes.draw do
   get '/login/:user_id/*auth_token' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
 
+  get '/discover' => 'tweets#discover', as: :tweet_discover
+
   # USERS
   resources :users, except:[:new] do
     get '/favorites' => 'users#favorites'
@@ -26,7 +28,7 @@ Kitter::Application.routes.draw do
     post '/unfollow' => 'users#unfollow'
     post '/block' => 'users#block'
     post '/unblock' => 'users#unblock'
-    resources :tweets, shallow: true do
+    resources :tweets, except:[:index], shallow: true do
        post '/favorite' => 'tweets#favorite'
        post '/unfavorite' => 'tweets#unfavorite'
        post '/retweet' => 'tweets#retweet'
@@ -37,6 +39,5 @@ Kitter::Application.routes.draw do
 
   # HASHTAGS
   get '/hashtags/:hashtag' => 'hashtags#show', as: :hashtag
-  get '/discover' => 'hashtags#index', as: :hashtag_discover
 
 end

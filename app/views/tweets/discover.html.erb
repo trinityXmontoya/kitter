@@ -1,0 +1,26 @@
+<% content_for :left_sidebar do %>
+  <% content_for :left_sidebar_top do %>
+    <div class="sidebar left-sidebar-top">
+      <a><h5>Tweets <i class="fa fa-chevron-right"></i></h5></a>
+      <hr>
+      <a><h5>Who to follow <i class="fa fa-chevron-right"></i></h5></a>
+      <hr>
+      <a><h5>Popular accounts <i class="fa fa-chevron-right"></i></h5></a>
+    </div>
+  <% end %>
+  <%= render 'shared/main_left_sidebar' %>
+<% end %>
+
+<!-- YIELD -->
+<h3>Tweets</h3>
+<p>What's happening right meow.</p>
+<% @tweets.each do |tweet| %>
+  <% cache tweet do %>
+    <% if tweet.retweets.first %>
+      <p class="retweet_notice">
+        <i class="fa fa-retweet"></i> <%= tweet.retweets.first.user.username %> retweeted
+      </p>
+    <% end %>
+    <%= render 'tweets/individual_tweet_template', tweet: tweet %>
+  <% end %>
+<% end %>
