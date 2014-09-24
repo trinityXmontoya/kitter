@@ -43,7 +43,7 @@
       <%= menu_group :pull => :right do %>
         <% if current_user %>
             <%= menu_item image_tag('notification.png', class: 'nav_icon')+"Notifications", user_notifications_path(current_user)%>
-            <%= menu_item image_tag('hashtag.png', class: 'nav_icon') + "Discover", hashtag_discover_path %>
+            <%= menu_item image_tag('hashtag.png', class: 'nav_icon') + "Discover", tweet_discover_path %>
             <%= menu_item image_tag('me.png', class: 'nav_icon')+"Me", user_path(current_user)%>
             <%= drop_down  image_tag('settings.png', class: 'nav_icon') do %>
               <% edit_user_tab = image_tag(current_user.profile_photo_url,size:"30")+current_user.username+" | Edit your profile"%>
@@ -71,8 +71,8 @@
             </div>
           </div>
         <% end %>
-          
-          <%= content_for?(:content) ? yield(:content) : yield %>
+
+          <%= content_for?(:main_layout) ? yield(:main_layout) : yield %>
       </div><!--/row-->
     </div> <!-- /container -->
   </body>

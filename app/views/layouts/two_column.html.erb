@@ -1,0 +1,16 @@
+<%= stylesheet_link_tag "home", :media => "all" %>
+
+<%= content_for :main_layout do %>
+    <div style="min-width:1200px;">
+      <div class="left_sidebar">
+        <%= yield :left_sidebar %>
+        <%= render 'shared/sidebar_footer'%>
+      </div><!--/left_sidebar-->
+      <div class="main_content">
+        <%= bootstrap_flash %>
+        <%= yield %>
+      </div><!-- .main_content -->
+    </div>
+<% end %> <!-- end content -->
+
+<%= render template: "layouts/application" %>
