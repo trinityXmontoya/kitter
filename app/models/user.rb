@@ -25,7 +25,7 @@ include Rails.application.routes.url_helpers
   validates :background_photo_url, :profile_photo_url, presence: true
 
   validates :username, :email, uniqueness: true
-  validates :username, uniqueness: {case_insensitive: true}
+  validates :username, uniqueness: {case_sensitive: false}
   validates :username, length: {maximum: 15}
   validates :username, format: {with: /\w/, message: "Usernames may only contain numbers, letters, or underscores."}
 

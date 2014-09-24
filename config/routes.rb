@@ -37,4 +37,6 @@ Kitter::Application.routes.draw do
   # HASHTAGS
   get '/hashtags/:hashtag' => 'hashtags#show', as: :hashtag
 
+  match '*path' => redirect('/'), via: :get
+
 end
