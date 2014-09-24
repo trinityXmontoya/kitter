@@ -131,3 +131,12 @@
   .tweet-modal form {
     padding: 50px;
   }
+
+/*LEFT SIDEBAR*/
+
+.left-sidebar-top {
+  padding: 7px;
+}
+  .left-sidebar-top i {
+    float: right;
+  }
