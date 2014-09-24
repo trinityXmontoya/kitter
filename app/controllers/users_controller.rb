@@ -125,8 +125,4 @@ class UsersController < ApplicationController
     @users=users.sample(3)
   end
 
-  def render_user_static_layout
-    render :layout => 'user_static'
-  end
-
 end
