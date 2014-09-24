@@ -44,7 +44,7 @@ class Tweet < ActiveRecord::Base
         if media
           string << media
           short_url = shorten_url(word)
-          string.sub!(word, "<a href='#{short_url}'>#{short_url}</a>")
+          string.sub!(word, "<a href='#{short_url}'>#{short_url.slice! "http://www."}</a>")
         end
       end
     end
@@ -84,7 +84,7 @@ class Tweet < ActiveRecord::Base
 
   def shorten_url(url)
     link = ShortLink.find_or_create_by(orig_url: url)
-    return 'www.kitter.cat/s/' + link.short_url_path
+    return 'https://www.kitter.cat/s/' + link.short_url_path
   end
 
   def generate_short_url
