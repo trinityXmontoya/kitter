@@ -15,7 +15,6 @@ class UsersController < ApplicationController
     @tweets=(@user.tweets.includes(:user)+retweets)
     @tweets=@tweets.sort_by{|tweet| tweet.updated_at}.reverse
     init_const_vars
-    render_user_static_layout
   end
 
   def create

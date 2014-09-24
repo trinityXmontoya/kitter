@@ -20,9 +20,6 @@ Kitter::Application.routes.draw do
 
   # USERS
   resources :users, except:[:new] do
-    get '/favorites' => 'users#favorites'
-    get '/followers' => 'users#followers'
-    get '/following' => 'users#following'
     get '/notifications' => 'users#notifications'
     post '/follow' => 'users#follow'
     post '/unfollow' => 'users#unfollow'
