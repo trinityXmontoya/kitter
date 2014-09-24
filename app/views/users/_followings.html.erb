@@ -1,0 +1,16 @@
+<h3>Following</h3>
+<hr>
+<% if @followings %>
+  <% @followings.each do |follow| %>
+    <img src="<%= follow.profile_photo_url%>" alt="" />
+    <%= link_to follow do %>
+    <%= follow.name %>
+    <%= "@#{follow.username}" %>
+    <% end %>
+    <%= follow.bio %>
+    <%= button_to "Block", user_block_path(follow) , class: 'btn'%>
+    <%= button_to "Unfollow", user_unfollow_path(follow) , class: 'btn'%>
+  <% end %>
+<% else %>
+  Too proud to follow anyone else...
+<% end %>

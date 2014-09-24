@@ -61,16 +61,28 @@
           <div class="modal fade" id="newTweetModal" tabindex="-1" role="dialog" aria-labeledby="newTweetModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content tweet-modal">
+                <p>Compose new Meow</p>
+                <br>
                 <%= flash[:notice] %>
 
                 <%= form_for [current_user,Tweet.new] do |f| %>
-                <%= f.text_field :content, placeholder: 'limit 140 characters', maxlength: 140  %>
+                <%= f.text_field :content, placeholder: 'limit 140 characters', maxlength: 140, required: 'true'  %>
+                <span id="modal-tweet-char-count">140</span>
                 <%= f.submit "Meow!" %>
                 <% end %>
               </div>
             </div>
           </div>
         <% end %>
+        <script>
+          $(document).ready( function(){
+            $('.tweet-modal input#tweet_content').on('keyup',setCharCount)
+          });
+          var setCharCount = function(){
+            var val = 140 - $('.tweet-modal input#tweet_content').val().length
+            $('#modal-tweet-char-count').text(val)
+          }
+        </script>
 
           <%= content_for?(:main_layout) ? yield(:main_layout) : yield %>
       </div><!--/row-->

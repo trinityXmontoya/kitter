@@ -1,0 +1,21 @@
+<h3>Followers</h3>
+<hr>
+<% if @followers %>
+  <% @followers.each do |follower| %>
+    <img src="<%= follower.profile_photo_url%>" alt="" />
+    <%= link_to follower do %>
+    <%= follower.name %>
+    <%= "@#{follower.username}" %>
+    <% end %>
+    <%= follower.bio %>
+    <%= button_to "Block", user_block_path(follower) , class: 'btn'%>
+    <% if current_user.followings.include?(follower) %>
+      <%= button_to "Unfollow", user_unfollow_path(follower) , class: 'btn'%>
+    <% else %>
+      <%= button_to "Follow", user_follow_path(follower) , class: 'btn'%>
+    <% end %>
+  <% end %>
+<% else %>
+  No followers!
+  Perhaps they should meow about more interesting things...
+<% end %>

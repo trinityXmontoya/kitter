@@ -9,12 +9,12 @@
               Tweets<br><span class="numbers"><%= @user.cached_tweets_size %></span>
             </li>
         <% end%>
-        <%= link_to user_following_path(@user) do %>
+        <%= link_to @user do %>
           <li>
             Following<br><span class="numbers"><%= @user.cached_followers_size %></span>
           </li>
         <% end%>
-        <%= link_to user_followers_path(@user) do %>
+        <%= link_to @user do %>
           <li>
             Followers<br><span class="numbers"><%=@user.cached_followings_size %></span>
           </li>
