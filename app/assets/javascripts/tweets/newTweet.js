@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  var tweetText = $('#tweet-content-text') ;
+  var tweetText = $('#tweet-content-text');
   tweetText.on("focusin",displayFullForm);
   tweetText.on("focusout",displayFullForm);
   tweetText.bind('keyup',tweetCharCount);
@@ -17,12 +17,12 @@ var displayFullForm = function(){
   }
   if ($(this).text().length == 0)
     {
-      if( $(this).is(":active") ){
+      $(this).toggleClass('enlarge-form-input');
+      $('#tweet_form_options').toggleClass('display-me');
+      if( $(this).hasClass("enlarge-form-input") ){
         $('#tweet_box').css('height','235px');
       }
       else { $('#tweet_box').css('height','70px'); }
-      $(this).toggleClass('enlarge-form-input');
-      $('#tweet_form_options').toggleClass('display-me');
     }
   else if ($(this).is(":focus")) {
     $(this).css('color','black');

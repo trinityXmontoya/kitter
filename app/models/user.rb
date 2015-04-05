@@ -43,8 +43,8 @@ include Rails.application.routes.url_helpers
   def send_login_link
     reset_auth_token
     link = root_path + "login/" + self.username + "/" + self.auth_token
-    Pony.mail(to: self.email, subject: "Login", body: login_msg_body(link) )
     update_attribute(:login_link_sent, Time.now)
+    Pony.mail(to: self.email, subject: "Login", body: login_msg_body(link) )
   end
 
   def reset_auth_token
@@ -58,7 +58,7 @@ include Rails.application.routes.url_helpers
 
   def login_msg_body(login_link)
     "Hey #{self.username.capitalize}, here's your login link: #{login_link}.
-  Requested on #{self.login_link_sent}. If not used it will expire in 2 minutes for safety reasons. Read more about our login-process #{root_path}"
+  Requested on #{self.login_link_sent.strftime("%b %d, %Y at %I:%M%p")}. If not used it will expire in 2 minutes for safety reasons. Read more about our login-process here: #{root_path}faq"
   end
 
 
@@ -139,6 +139,10 @@ include Rails.application.routes.url_helpers
   #CACHING ----------------
   def self.cached_find(username)
     Rails.cache.fetch([name,username]) {find_by_username(username)}
+  end
+
+  def self.cached_find_by_email(email)
+    Rails.cache.fetch([name,email]) {find_by_email(email)}
   end
 
   def flush_cache

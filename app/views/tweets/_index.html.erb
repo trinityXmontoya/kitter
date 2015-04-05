@@ -1,7 +1,11 @@
 <h2>Tweets</h2>
 <hr>
-<% tweets.each do |tweet| %>
-  <% cache tweet do %>
-    <%= render 'tweets/individual_tweet_template', tweet: tweet %>
-  <% end %>
+<% if tweets.length > 0%>
+	<% tweets.each do |tweet| %>
+	  <% cache tweet do %>
+	    <%= render 'tweets/individual_tweet_template', tweet: tweet %>
+	  <% end %>
+	<% end %>
+<% else %>
+	No tweets right now! Get moving!
 <% end %>

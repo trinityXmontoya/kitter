@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
   def request_token
     lookup = params[:user_id]
     if lookup.include? '@'
-      @user = User.cached_find_by(email: lookup)
+      @user = User.cached_find_by_email(lookup)
     else
       @user = User.cached_find(lookup)
     end

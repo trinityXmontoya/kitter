@@ -19,6 +19,10 @@ development:
   encoding: unicode
   database: kitter_development
   pool: 5
+  username: postgres
+  password: 123456
+  host: localhost
+  reconnect: true
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -46,6 +50,10 @@ test:
   encoding: unicode
   database: kitter_test
   pool: 5
+  username: postgres
+  password: 123456
+  host: localhost
+  reconnect: true
 
 production:
   adapter: postgresql

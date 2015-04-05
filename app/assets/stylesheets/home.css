@@ -1,6 +1,12 @@
 /*HOME LAYOUT*/
-
-
+/*flash notice*/
+.full-notice-join {
+  background: rgba(0,0,0,.8);
+  padding: 20px;
+  /* width: 50%; */
+  float: right;
+  color: white;
+}
 /*HOME NAV*/
 #home_nav{
   background-color: whitesmoke;
