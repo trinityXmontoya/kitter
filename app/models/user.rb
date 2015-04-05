@@ -44,7 +44,7 @@ include Rails.application.routes.url_helpers
     reset_auth_token
     link = root_path + "login/" + self.username + "/" + self.auth_token
     update_attribute(:login_link_sent, Time.now)
-    Pony.mail(to: self.email, subject: "Login", body: login_msg_body(link) )
+    Pony.mail(to: self.email, subject: "Login", html_body: login_msg_body(link) )
   end
 
   def reset_auth_token
@@ -57,8 +57,9 @@ include Rails.application.routes.url_helpers
   end
 
   def login_msg_body(login_link)
-    "Hey #{self.username.capitalize}, here's your login link: #{login_link}.
-  Requested on #{self.login_link_sent.strftime("%b %d, %Y at %I:%M%p")}. If not used it will expire in 2 minutes for safety reasons. Read more about our login-process here: #{root_path}faq"
+    binding.pry
+    "Hey #{self.username.capitalize}, here's <a href='#{ENV['ROOT_URL']+login_link}'>your login link</a>.
+  Requested on #{self.login_link_sent.strftime("%b %d, %Y at %I:%M%p")}. If not used it will expire in 2 minutes for safety reasons. Read more about our login-process here: #{ENV['ROOT_URL']+root_path}faq"
   end
 
 
