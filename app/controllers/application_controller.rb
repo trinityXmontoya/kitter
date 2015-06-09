@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+  before_filter :expire_hsts
 
   helper_method :current_user
   def current_user
@@ -19,5 +20,9 @@ class ApplicationController < ActionController::Base
     @users=users.sample(3)
     @hashtags=Hashtag.cached_top_ten
     render :layout => 'two_column'
+  end
+
+  def expire_hsts
+    response.headers["Strict-Transport-Security"] = 'max-age=0'
   end
 end
