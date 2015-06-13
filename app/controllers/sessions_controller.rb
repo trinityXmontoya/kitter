@@ -4,11 +4,10 @@ class SessionsController < ApplicationController
   end
 
   def validate_input
-    puts "VALIDATING YR INPUT"
     if params[:type] == 'email'
       user = User.find_by_email(params[:user][:email])
     elsif params[:type] == 'username'
-      user = User.cached_find(params[:user][:username])
+      user = User.find(params[:user][:username])
     end
     respond_to do |format|
       if current_user && current_user == user
@@ -22,9 +21,9 @@ class SessionsController < ApplicationController
   def request_token
     lookup = params[:user_id]
     if lookup.include? '@'
-      @user = User.cached_find_by_email(lookup)
+      @user = User.find_by_email(lookup)
     else
-      @user = User.cached_find(lookup)
+      @user = User.find(lookup)
     end
     if @user
       @user.send_login_link

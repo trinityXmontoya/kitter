@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   end
 
   def two_column_layout
-    users = User.select(:profile_photo_url,:username, :name).reject {|user| current_user.followings.include?(user)}
+    users = User.select(:profile_photo_url,:username, :name).reject {|user| current_user.followings.include?(user) || user.name == current_user.name}
     @users=users.sample(3)
     @hashtags=Hashtag.cached_top_ten
     render :layout => 'two_column'

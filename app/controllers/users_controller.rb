@@ -121,7 +121,8 @@ class UsersController < ApplicationController
     @hashtags = Hashtag.cached_top_ten
     @path = @user, Tweet.new
     puts "About to sort through users"
-    users = User.all.reject {|user| @user.followings.include?(user)}
+    users = User.all.reject {|user| @user.followings.include?(user) || user == @user}
+    puts users, "otpions!"
     @users=users.sample(3)
   end
 
